@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta property="og:title" content="Personal Portfolio">
+    <meta property="og:description" content="My Personal Portfolio">
+    <meta property="og:url" content="{{ url }}">
+
+    <link rel="preconnect" href="https://fonts.gstatic.com">
+    <link
+        href="https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&display=swap"
+        rel="stylesheet">
+
+    <link lang="sass" rel="stylesheet" href="./static/styles/main.css">
+    <link rel="icon" href="./static/img/favicon.ico" type="image/x-icon" />
+    <!-- map stuff -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/leaflet@1.7.1/dist/leaflet.css" />
+    <style>
+    #map {
+        height: 400px;
+        width: 600px;
+        margin-left: 25px;
+        border-radius: 8%;
+    }
+    </style>
+    <title>{{ title }}</title>
+</head>
+
+<body>
+    <header class="nav-bar">
+        <div class="nav-content">
+            <a href="/">
+                <div class="nav-logo">
+                    <img src="./static/img/logo.svg" />
+                </div>
+            </a>
+        </div>
+        <ul>
+          <li><a href="/">Home</a></li>
+          <li><a href="/education">Education</a></li>
+          <li><a href="/hobbies">Hobbies</a></li>
+          <li><a href="/projects">Projects</a></li>
+          <li><a href="/about">About</a></li>
+        </ul>
+    </header>
+    <div class="profile">
+        <h1>{{ title }}</h1>
+    </div>
+
+    <div class="block">
+        <div class="text">
+            <h2>
+                About Me
+            </h2>
+            <h3>
+                Lorem ipsum dolor sit amet consectetur, adipisicing elit. Dolores illum omnis, perspiciatis nisi accusantium
+                libero ut! Vitae voluptates deleniti, dignissimos repellendus, alias pariatur eos dolorum vero expedita
+                illum eum quod?
+            </h3>
+        </div>
+        <img width="25%" height="25%" src="./static/img/portrait.svg">
+    </div>
+    <div class="block">
+        <div class="text">
+            <h2>
+                The Places I Visted
+            </h2>
+            <h3>
+                These places are New York, London, Tokyo, Berlin, Rome, Sydney, Moscow, Madrid, Toronto, Rio de Janeiro, Santiago, Buenos Aires, Dubai, Beijing, San Francisco, Copenhagen, Melbourne, Seoul, and Sydney.            </h3>
+        </div>
+        <div id="map"></div>
+            <script src="https://cdn.jsdelivr.net/npm/leaflet@1.7.1/dist/leaflet.js"></script>
+            <link rel="stylesheet" href="http://code.ionicframework.com/ionicons/1.5.2/css/ionicons.min.css">
+            <script>
+                var map = L.map('map').setView([0, 0], 2);
+                L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+                attribution: 'Map data &copy; <a href="https://www.openstreetmap.org/">OpenStreetMap</a> contributors'
+                }).addTo(map);
+                var cityCoordinates = [
+                    [40.7128, -74.0060],    // New York
+                    [51.5074, -0.1278],     // London
+                    [35.6895, 139.6917],    // Tokyo
+                    [48.8566, 2.3522],      // Paris
+                    [52.5200, 13.4050],     // Berlin
+                    [41.9028, 12.4964],     // Rome
+                    [-33.8651, 151.2099],   // Sydney
+                    [55.7558, 37.6176],     // Moscow
+                    [40.4168, -3.7038],     // Madrid
+                    [43.6532, -79.3832],    // Toronto
+                    [-22.9068, -43.1729],   // Rio de Janeiro
+                    [-33.4489, -70.6693],   // Santiago
+                    [-34.6037, -58.3816],   // Buenos Aires
+                    [25.2048, 55.2708],     // Dubai
+                    [39.9042, 116.4074],    // Beijing
+                    [37.7749, -122.4194],   // San Francisco
+                    [55.6761, 12.5683],     // Copenhagen
+                    [-37.8136, 144.9631],   // Melbourne
+                    [37.5665, 126.9780],    // Seoul
+                    [-33.8675, 151.2070]    // Sydney
+                ];
+
+                // Mark the cities on the map
+                for (var i = 0; i < cityCoordinates.length; i++) {
+                    var marker = L.marker(cityCoordinates[i]).addTo(map);
+                }
+        </script>
+    </div>
+</body>
+</html>
