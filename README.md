@@ -50,7 +50,7 @@ Make sure you have python3 and pip installed
 
 Create and activate virtual environment using virtualenv
 ```bash
-$ python -m venv python3-virtualenv
+$ python3 -m venv python3-virtualenv
 $ source python3-virtualenv/bin/activate
 ```
 
@@ -62,20 +62,27 @@ pip install -r requirements.txt
 
 ## Usage
 
-Create a .env file using the example.env template (make a copy using the variables inside of the template)
+Create and fill in a .env file using the example.env template (make a copy using the variables inside of the template)
 
 Start flask development server
 ```bash
-$ export FLASK_ENV=development
+$ export FLASK_APP=app
+$ export FLASK_DEBUG=1
 $ flask run
 ```
 
 You should get a response like this in the terminal:
 ```
 ❯ flask run
- * Environment: development
+ * Serving Flask app 'app' (lazy loading)
+ * Environment: production
+   WARNING: This is a development server. Do not use it in a production deployment.
+   Use a production WSGI server instead.
  * Debug mode: on
  * Running on http://127.0.0.1:5000/ (Press CTRL+C to quit)
+ * Restarting with stat
+ * Debugger is active!
+ * Debugger PIN: 129-890-435
 ```
 
 You'll now be able to access the website at `localhost:5000` or `127.0.0.1:5000` in the browser! 
