@@ -66,8 +66,6 @@ Create and fill in a .env file using the example.env template (make a copy using
 
 Start flask development server
 ```bash
-$ export FLASK_APP=app
-$ export FLASK_DEBUG=1
 $ flask run
 ```
 
