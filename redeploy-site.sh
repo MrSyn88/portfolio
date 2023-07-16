@@ -1,6 +1,6 @@
 #!/bin/zsh
 
-tmux kill-server
+
 cd portfolio
 git fetch && git reset origin/main --hard
 # read -p "MySQL Host: " MYSQL_HOST
@@ -15,4 +15,5 @@ git fetch && git reset origin/main --hard
 # echo "MYSQL_DATABASE=$MYSQL_DATABASE" >> .env
 source python3-virtualenv/bin/activate
 pip install -r requirements.txt
-tmux new -d -s prod 'cd ~/portfolio;source python3-virtualenv/bin/activate;flask run --host=0.0.0.0'
+systemctl daemon-reload
+system restart myportfolio
