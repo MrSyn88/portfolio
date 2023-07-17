@@ -1,5 +1,5 @@
 import os
-from flask import Flask, render_template, request, jsonify
+from flask import Flask, render_template, request, redirect, url_for, jsonify
 from dotenv import load_dotenv
 from peewee import MySQLDatabase, Model, CharField, TextField, DateTimeField, DoesNotExist
 from playhouse.shortcuts import model_to_dict
@@ -32,7 +32,7 @@ mydb.connect()
 mydb.create_tables([TimelinePost])
 
 def getGrav(string):
-    return ("https://www.gravatar.com/avatar/" + hashlib.md5(string.encode("utf")).hexdigest() + "?s=200")
+    return ("https://www.gravatar.com/avatar/" + hashlib.md5(string.encode("utf")).hexdigest() + "?s=100")
 
 @app.route('/')
 def index():
@@ -63,11 +63,15 @@ def timeline():
     posts = [p for p in TimelinePost.select().order_by(TimelinePost.created_at.desc())]
     return render_template('timeline.html', title="Timeline", url=os.getenv("URL"), posts=posts, getGrav=getGrav)
 
-@app.errorhandler(404)
-def page_not_found(error):
-    return render_template("404.html", title="404", url=os.getenv("URL")), 404
-
 @app.route('/timeline', methods=['POST'])
+def post_timeline_post():
+    name = request.form['name']
+    email = request.form['email']
+    content = request.form['content']
+    TimelinePost.create(name=name, email=email, content=content)
+    
+    return redirect(url_for('timeline'))
+
 @app.route('/api/timeline_post', methods=['POST'])
 def post_time_line_post():
     name = request.form['name']
@@ -94,3 +98,7 @@ def delete_timeline_post(post_id):
         return jsonify({'message': 'Timeline post deleted successfully'}), 200
     except DoesNotExist:
         return jsonify({'message': 'Timeline post not found'}), 404
+
+@app.errorhandler(404)
+def page_not_found(error):
+    return render_template("404.html", title="404", url=os.getenv("URL")), 404
