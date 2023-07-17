@@ -127,9 +127,7 @@ body {
     background-color: #fff;
     padding: 20px;
     margin-bottom: 50px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
+    
     margin-left: 25px;
     margin-right: 25px;
     border: solid 1px #eee;
@@ -146,4 +144,24 @@ body {
 
 .block .text {
     padding: 100px;
+}
+
+.bottom {
+    display: flex;
+    color: grey;
+    font-size: 80%;
+    align-items: right;
+    justify-content: right;
+}
+
+.timestamp {
+    padding-right: 10px;
+}
+
+ol {
+    margin: 0;
+}
+
+.post p {
+    margin-left:15px;
 }
