@@ -149,7 +149,6 @@ body {
 .bottom {
     display: flex;
     color: grey;
-    font-size: 80%;
     align-items: right;
     justify-content: right;
 }
@@ -158,10 +157,7 @@ body {
     padding-right: 10px;
 }
 
-ol {
-    margin: 0;
-}
-
-.post p {
-    margin-left:15px;
+.post_content {
+    font-size: 3vw;
+    word-break: keep-all !important;
 }

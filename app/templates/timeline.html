@@ -3,53 +3,27 @@
 <div class="profile">
     <h1>{{ title }}</h1>
 </div>
-
 <ol>
+{% for posts in posts %}
     <div class="block">
         <div class="row">
-            <div class="col-2">
-                <img src="https://www.gravatar.com/avatar/95ed1ad46086f12e04da7adc7c477ded"
+            <div class="col-4 align-self-center">
+                <h1>{{ posts.name }}</h1>
+                <img src={{ getGrav(posts.email) }}
                     style="border-radius: 50%;" />
-                <h4>Test Name</h4>
             </div>
-            <div class="col-10 align-self-center">
-                <p>
-                    Lorem ipsum dolor sit amet consectetur adipisicing elit. Ab rem blanditiis illum cumque,
-                    expedita quas nam
-                    doloremque atque delectus nihil! Corporis eveniet eligendi architecto sed harum cum est
-                    doloribus. Accusamus?
+            <div class="col-8 align-self-center">
+                <p class="post_content">
+                    {{ posts.content }}
                 </p>
             </div>
         </div>
         <div class="bottom">
             <p class="timestamp">
-                email@email.com 12:34pm
+                {{ posts.created_at }}
             </p>
         </div>
     </div>
-    <div class="block">
-        <div class="row">
-            <div class="col-2">
-                <img src="https://www.gravatar.com/avatar/00000000000000000000000000000000"
-                    style="border-radius: 50%;" />
-                <h4>Test Name</h4>
-            </div>
-            <div class="col-10 align-self-center">
-                <p>
-                    Lorem ipsum dolor sit amet consectetur adipisicing elit. Ab rem blanditiis illum cumque,
-                    expedita quas
-                    nam
-                    doloremque atque delectus nihil! Corporis eveniet eligendi architecto sed harum cum est
-                    doloribus.
-                    Accusamus?
-                </p>
-            </div>
-        </div>
-        <div class="bottom">
-            <p class="timestamp">
-                email@email.com 12:34pm
-            </p>
-        </div>
-    </div>
+{% endfor %}
 </ol>
 {% endblock %}
