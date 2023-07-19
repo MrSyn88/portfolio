@@ -1,11 +1,15 @@
 import os
 from flask import Flask, render_template, request, redirect, url_for, jsonify
 from dotenv import load_dotenv
-from peewee import MySQLDatabase, Model, CharField, TextField, DateTimeField, DoesNotExist
+from peewee import MySQLDatabase, Model, CharField, TextField, DateTimeField, DoesNotExist, IntegrityError
 from playhouse.shortcuts import model_to_dict
 import datetime
 import hashlib
 from hashlib import md5
+import re
+
+NAME_PATTERN = r'^[a-zA-Z\s\'\-]+$'
+EMAIL_PATTERN = r'^[\w\.-]+@[a-zA-Z\d\.-]+\.[a-zA-Z]{2,}$'
 
 load_dotenv()
 app = Flask(__name__)
@@ -28,67 +32,162 @@ class TimelinePost(Model):
     class Meta:
         database = mydb
         
+class InvalidPostException(Exception):
+    "Raised when a post contains an empty field"
+    pass
+
+class InvalidNameException(Exception):
+    "Raised when a post contains an invalid name"
+    pass
+
+class InvalidEmailException(Exception):
+    "Raised when a post contains an invalid email"
+    pass
+        
 mydb.connect()
 mydb.create_tables([TimelinePost])
 
-def getGrav(string):
-    return ("https://www.gravatar.com/avatar/" + hashlib.md5(string.encode("utf")).hexdigest() + "?s=100")
+def handle_timeline_post(form):
+    "handles POST form data"
+    
+    name = form.get("name", "").strip()
+    email = form.get("email", "").strip()
+    content = form.get("content", "").strip()
+
+    if name == "" or email == "" or content == "":
+        raise InvalidPostException("Empty field")
+    
+    if not re.match(NAME_PATTERN, name, re.U):
+        raise InvalidNameException("Invalid name")
+    
+    if not re.match(EMAIL_PATTERN, email, re.U):
+        raise InvalidEmailException("Invalid email")
+
+    timeline_post = TimelinePost.create(name=name, email=email, content=content)
+    return model_to_dict(timeline_post)
+
+def getGrav(email):
+    "returns the gravatar link for the given email"
+    return ("https://www.gravatar.com/avatar/" + hashlib.md5(email.encode("utf")).hexdigest() + "?s=100")
 
 @app.route('/')
 def index():
-    return render_template('index.html', title="Nicolas Ruiz", url=os.getenv("URL"))
-
+    try:
+        return render_template('index.html', title="Nicolas Ruiz", url=os.getenv("URL"))
+    except Exception as e:
+        # Log the exception for debugging purposes if needed
+        print(e)
+        # Render an error template or redirect to a specific error page
+        return render_template('error.html', title="Error", message="An error occurred.")
 
 @app.route('/about')
 def about():
-    return render_template('about.html', title="About", url=os.getenv("URL"))
-
+    try:
+        return render_template('about.html', title="About", url=os.getenv("URL"))
+    except Exception as e:
+        # Log the exception for debugging purposes if needed
+        print(e)
+        # Render an error template or redirect to a specific error page
+        return render_template('error.html', title="Error", message="An error occurred.")
 
 @app.route('/hobbies')
 def hobbies():
-    return render_template('hobbies.html', title="Hobbies", url=os.getenv("URL"))
-
+    try:
+        return render_template('hobbies.html', title="Hobbies", url=os.getenv("URL"))
+    except Exception as e:
+        # Log the exception for debugging purposes if needed
+        print(e)
+        # Render an error template or redirect to a specific error page
+        return render_template('error.html', title="Error", message="An error occurred.")
 
 @app.route('/education')
 def education():
-    return render_template('education.html', title="Education", url=os.getenv("URL"))
-
+    try:
+        return render_template('education.html', title="Education", url=os.getenv("URL"))
+    except Exception as e:
+        # Log the exception for debugging purposes if needed
+        print(e)
+        # Render an error template or redirect to a specific error page
+        return render_template('error.html', title="Error", message="An error occurred.")
 
 @app.route('/projects')
 def projects():
-    return render_template('projects.html', title="Projects", url=os.getenv("URL"))
+    try:
+        return render_template('projects.html', title="Projects", url=os.getenv("URL"))
+    except Exception as e:
+        # Log the exception for debugging purposes if needed
+        print(e)
+        # Render an error template or redirect to a specific error page
+        return render_template('error.html', title="Error", message="An error occurred.")
 
 @app.route('/timeline', methods=['GET'])
 def timeline():
-    posts = [p for p in TimelinePost.select().order_by(TimelinePost.created_at.desc())]
-    return render_template('timeline.html', title="Timeline", url=os.getenv("URL"), posts=posts, getGrav=getGrav)
+    try:
+        posts = [p for p in TimelinePost.select().order_by(TimelinePost.created_at.desc())]
+        return render_template('timeline.html', title="Timeline", url=os.getenv("URL"), posts=posts, getGrav=getGrav)
+    except Exception as e:
+        # Log the exception for debugging purposes if needed
+        print(e)
+        # Render an error template or redirect to a specific error page
+        return render_template('error.html', title="Error", message="An error occurred.")
 
 @app.route('/timeline', methods=['POST'])
 def post_timeline_post():
-    name = request.form['name']
-    email = request.form['email']
-    content = request.form['content']
-    TimelinePost.create(name=name, email=email, content=content)
-    
-    return redirect(url_for('timeline'))
+    try:
+        _ = handle_timeline_post(request.form)
+        return jsonify({"message": "Post successful"}), 200
+
+    except InvalidPostException as e:
+        return jsonify({"error": str(e)}), 400
+
+    except InvalidNameException as e:
+        return jsonify({"error": str(e)}), 400
+
+    except InvalidEmailException as e:
+        return jsonify({"error": str(e)}), 400
+
+    except IntegrityError as e:
+        return jsonify({"error": "Database integrity error"}), 500
+
+    except Exception as e:
+        return jsonify({"error": "Internal server error"}), 500
 
 @app.route('/api/timeline_post', methods=['POST'])
 def post_time_line_post():
-    name = request.form['name']
-    email = request.form['email']
-    content = request.form['content']
-    timeline_post = TimelinePost.create(name=name, email=email, content=content)
-    
-    return jsonify(model_to_dict(timeline_post)), 201
+    try:
+        form = request.form.to_dict()
+        result = handle_timeline_post(form)
+        return jsonify(result), 201
+
+    except InvalidPostException as e:
+        return jsonify({'error': str(e)}), 400
+
+    except InvalidNameException as e:
+        return jsonify({'error': str(e)}), 400
+
+    except InvalidEmailException as e:
+        return jsonify({'error': str(e)}), 400
+
+    except IntegrityError as e:
+        return jsonify({'error': 'Database integrity error'}), 500
+
+    except Exception as e:
+        return jsonify({'error': 'Internal server error'}), 500
 
 @app.route('/api/timeline_post', methods=['GET'])
 def get_time_line_post():
-    return {
-        'timeline_posts': [
+    try:
+        timeline_posts = [
             model_to_dict(p)
             for p in TimelinePost.select().order_by(TimelinePost.created_at.desc())
         ]
-    }
+        return {'timeline_posts': timeline_posts}
+
+    except Exception as e:
+        # Log the exception for debugging purposes if needed
+        print(e)
+        # Return an error JSON response
+        return jsonify({'error': 'Internal server error'}), 500
 
 @app.route('/api/timeline_post/<int:post_id>', methods=['DELETE'])
 def delete_timeline_post(post_id):
@@ -96,8 +195,15 @@ def delete_timeline_post(post_id):
         timeline_post = TimelinePost.get_by_id(post_id)
         timeline_post.delete_instance()
         return jsonify({'message': 'Timeline post deleted successfully'}), 200
+
     except DoesNotExist:
         return jsonify({'message': 'Timeline post not found'}), 404
+
+    except IntegrityError as e:
+        return jsonify({'error': 'Database integrity error'}), 500
+
+    except Exception as e:
+        return jsonify({'error': 'Internal server error'}), 500
 
 @app.errorhandler(404)
 def page_not_found(error):

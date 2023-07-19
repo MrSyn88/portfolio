@@ -4,7 +4,7 @@
     <h1>{{ title }}</h1>
 </div>
 <div class="form-block">
-    <form method="POST" style="align-items: center;">
+    <form id="timelineForm" method="POST" action="/timeline">
         <div class="mb-3">
             <label for="nameInput" class="form-label">Name</label>
             <input type="text" class="form-control" id="nameInput" name="name" placeholder="name">
@@ -42,5 +42,29 @@
     </div>
 </div>
 {% endfor %}
+<script>
+    document.getElementById('timelineForm').addEventListener('submit', function (event) {
+        event.preventDefault();
+        const form = event.target;
 
+        fetch(form.action, {
+            method: 'POST',
+            body: new FormData(form),
+        })
+            .then(response => response.json())
+            .then(data => {
+                if (data.error) {
+                    // Show an alert with the error message for error responses
+                    alert(data.error);
+                } else {
+                    // Reload the page after a successful post
+                    window.location.reload();
+                }
+            })
+            .catch(error => {
+                console.error('Error:', error);
+                alert('An error occurred. Please try again later.');
+            });
+    });
+</script>
 {% endblock %}
