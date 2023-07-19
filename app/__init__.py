@@ -50,16 +50,21 @@ mydb.create_tables([TimelinePost])
 def handle_timeline_post(form):
     "handles POST form data"
     
+    #takes the name, email, and content from the form and  
+    #sets them to "" if it's empty or nonexistent
     name = form.get("name", "").strip()
     email = form.get("email", "").strip()
     content = form.get("content", "").strip()
 
+    #checks for empty fields
     if name == "" or email == "" or content == "":
         raise InvalidPostException("Empty field")
     
+    #checks for a valid name
     if not re.match(NAME_PATTERN, name, re.U):
         raise InvalidNameException("Invalid name")
     
+    #checks for a valid email
     if not re.match(EMAIL_PATTERN, email, re.U):
         raise InvalidEmailException("Invalid email")
 
@@ -73,67 +78,74 @@ def getGrav(email):
 @app.route('/')
 def index():
     try:
+        #attempt to render the page
         return render_template('index.html', title="Nicolas Ruiz", url=os.getenv("URL"))
     except Exception as e:
         # Log the exception for debugging purposes if needed
         print(e)
-        # Render an error template or redirect to a specific error page
+        # Render the error template
         return render_template('error.html', title="Error", message="An error occurred.")
 
 @app.route('/about')
 def about():
     try:
+        #attempt to render the page
         return render_template('about.html', title="About", url=os.getenv("URL"))
     except Exception as e:
         # Log the exception for debugging purposes if needed
         print(e)
-        # Render an error template or redirect to a specific error page
+        # Render the error template
         return render_template('error.html', title="Error", message="An error occurred.")
 
 @app.route('/hobbies')
 def hobbies():
     try:
+        #attempt to render the page
         return render_template('hobbies.html', title="Hobbies", url=os.getenv("URL"))
     except Exception as e:
         # Log the exception for debugging purposes if needed
         print(e)
-        # Render an error template or redirect to a specific error page
+        # Render the error template
         return render_template('error.html', title="Error", message="An error occurred.")
 
 @app.route('/education')
 def education():
     try:
+        #attempt to render the page
         return render_template('education.html', title="Education", url=os.getenv("URL"))
     except Exception as e:
         # Log the exception for debugging purposes if needed
         print(e)
-        # Render an error template or redirect to a specific error page
+        # Render the error template
         return render_template('error.html', title="Error", message="An error occurred.")
 
 @app.route('/projects')
 def projects():
     try:
+        #attempt to render the page
         return render_template('projects.html', title="Projects", url=os.getenv("URL"))
     except Exception as e:
         # Log the exception for debugging purposes if needed
         print(e)
-        # Render an error template or redirect to a specific error page
+        # Render the error template
         return render_template('error.html', title="Error", message="An error occurred.")
 
 @app.route('/timeline', methods=['GET'])
 def timeline():
     try:
+        #sort posts and send them into the timeline page on load
         posts = [p for p in TimelinePost.select().order_by(TimelinePost.created_at.desc())]
         return render_template('timeline.html', title="Timeline", url=os.getenv("URL"), posts=posts, getGrav=getGrav)
     except Exception as e:
         # Log the exception for debugging purposes if needed
         print(e)
-        # Render an error template or redirect to a specific error page
+        # Render the error template
         return render_template('error.html', title="Error", message="An error occurred.")
 
 @app.route('/timeline', methods=['POST'])
 def post_timeline_post():
     try:
+        #try to send the POST request
         _ = handle_timeline_post(request.form)
         return jsonify({"message": "Post successful"}), 200
 
@@ -155,6 +167,7 @@ def post_timeline_post():
 @app.route('/api/timeline_post', methods=['POST'])
 def post_time_line_post():
     try:
+        #try to send the POST request
         form = request.form.to_dict()
         result = handle_timeline_post(form)
         return jsonify(result), 201
@@ -177,6 +190,7 @@ def post_time_line_post():
 @app.route('/api/timeline_post', methods=['GET'])
 def get_time_line_post():
     try:
+        #try to get the timeline posts
         timeline_posts = [
             model_to_dict(p)
             for p in TimelinePost.select().order_by(TimelinePost.created_at.desc())
@@ -192,6 +206,7 @@ def get_time_line_post():
 @app.route('/api/timeline_post/<int:post_id>', methods=['DELETE'])
 def delete_timeline_post(post_id):
     try:
+        #try to delete the post with the post_id
         timeline_post = TimelinePost.get_by_id(post_id)
         timeline_post.delete_instance()
         return jsonify({'message': 'Timeline post deleted successfully'}), 200
