@@ -91,8 +91,8 @@ def getGrav(email):
 @app.route('/')
 def index():
     try:
-        # attempt to render the page
-        return render_template('index.html', title="Nicolas Ruiz", url=os.getenv("URL"))
+        #attempt to render the page
+        return render_template('index.html', title="Nicolas S. Ruiz", url=os.getenv("URL"))
     except Exception as e:
         # Log the exception for debugging purposes if needed
         print(e)
