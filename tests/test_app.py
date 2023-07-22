@@ -26,7 +26,8 @@ class AppTestCase(unittest.TestCase):
         assert "timeline_posts" in json
         assert len(json["timeline_posts"]) == 0
         response = self.client.post("/api/timeline_post",
-                                    data={"name": "John","email": "john@example.com", "content": "Hello world, I'm John!"})
+                                    data={"name": "John", "email": "john@example.com",
+                                          "content": "Hello world, I'm John!"})
         assert response.status_code == 200
         response = self.client.get("/api/timeline_post")
         assert response.is_json
@@ -59,3 +60,7 @@ class AppTestCase(unittest.TestCase):
         assert response.status_code == 400
         html = response.get_data(as_text=True)
         assert "Invalid email" in html
+
+
+if __name__ == '__main__':
+    unittest.main()

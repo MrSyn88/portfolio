@@ -48,3 +48,7 @@ class TestTimelinePost(unittest.TestCase):
         assert TimelinePost.get_by_id(1).name == 'John Doe'
         assert TimelinePost.get_by_id(1).content == 'Hello world, I\'m John!'
         assert TimelinePost.get_by_id(1).email == 'john.example.com'
+
+
+if __name__ == '__main__':
+    unittest.main()
