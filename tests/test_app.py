@@ -16,7 +16,7 @@ class AppTestCase(unittest.TestCase):
         assert response.status_code == 200
         html = response.get_data(as_text=True)
         assert "<title>Nicolas Ruiz</title>" in html
-        # TODO Add more tests relating to the home page
+        assert '<img width="125%" height="125%" src="./static/img/portrait.svg">'
 
     def test_timeline(self):
         response = self.client.get("/api/timeline_post")
