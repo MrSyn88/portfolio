@@ -30,6 +30,7 @@ class TestTimelinePost(unittest.TestCase):
         test_db.close()
 
     def test_timeline_post(self):
+        "Test database interaction with TimelinePost model"
         # Create 2 timeline posts.
         first_post = TimelinePost.create(name='John Doe', email='john.example.com',
                                          content='Hello world, I\'m John!')

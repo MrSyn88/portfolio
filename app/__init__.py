@@ -91,8 +91,8 @@ def getGrav(email):
 @app.route('/')
 def index():
     try:
-        # attempt to render the page
-        return render_template('index.html', title="Nicolas Ruiz", url=os.getenv("URL"))
+        #attempt to render the page
+        return render_template('index.html', title="Nicolas S. Ruiz", url=os.getenv("URL"))
     except Exception as e:
         # Log the exception for debugging purposes if needed
         print(e)
@@ -166,7 +166,7 @@ def post_timeline_post():
     try:
         # try to send the POST request
         _ = handle_timeline_post(request.form)
-        return jsonify({"message": "Post successful"}), 200
+        return jsonify({"message": "Post successful"}), 201
 
     except InvalidPostException as e:
         return jsonify({"error": str(e)}), 400

@@ -1,3 +1,4 @@
-#!/usr/bin/zsh
+#!/usr/bin/bash
 
-$PWD/python3-virtualenv/bin/python -m unittest discover -v tests/
+export TESTING=true
+"$PWD"/python3-virtualenv/bin/python -m unittest discover -vbk "test_*" tests/

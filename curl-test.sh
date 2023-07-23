@@ -1,4 +1,4 @@
-#!/bin/zsh
+#!/bin/bash
 
 #set test url and post data to be used in the test
 URL="http://localhost:5000/api/timeline_post"
