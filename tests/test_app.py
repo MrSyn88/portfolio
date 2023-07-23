@@ -118,6 +118,132 @@ class AppTestCase(unittest.TestCase):
         assert "Hello world, I'm John!"
         assert "document.getElementById('timelineForm').addEventListener('submit', function (event)" in html                
 
+    def test_malformed_timeline_post(self):
+        "Test timeline POST requests with malformed data"
+        # POST request missing name
+        response = self.client.post("/timeline",
+                                    data={"email": "john@example.com", "content": "Hello world, I'm John!"})
+        assert response.status_code == 400
+        json = response.get_json()
+        assert json is not None and "error" in json
+        assert "Empty field" in json["error"]
+
+        # POST request missing content
+        response = self.client.post("/timeline",
+                                    data={"name": "John Doe", "email": "john@example.com", "content": ""})
+        assert response.status_code == 400
+        json = response.get_json()
+        assert json is not None and "error" in json
+        assert "Empty field" in json["error"]
+
+        # POST request missing email
+        response = self.client.post("/timeline",
+                                    data={"name": "John Doe", "content": "Hello world, I'm John!"})
+        assert response.status_code == 400
+        json = response.get_json()
+        assert json is not None and "error" in json
+        assert "Empty field" in json["error"]
+
+        # POST request with malformed email
+        response = self.client.post("/timeline",
+                                    data={"name": "John Doe", "email": "not-an-email",
+                                          "content": "Hello world, I'm John!"})
+        assert response.status_code == 400
+        json = response.get_json()
+        assert json is not None and "error" in json
+        assert "Invalid email" in json["error"]
+
+        response = self.client.post("/timeline",
+                                    data={"name": "John Doe", "email": "email",
+                                          "content": "Hello world, I'm John!"})
+        assert response.status_code == 400
+        json = response.get_json()
+        assert json is not None and "error" in json
+        assert "Invalid email" in json["error"]
+
+        response = self.client.post("/timeline",
+                                    data={"name": "John Doe", "email": "email.com",
+                                          "content": "Hello world, I'm John!"})
+        assert response.status_code == 400
+        json = response.get_json()
+        assert json is not None and "error" in json
+        assert "Invalid email" in json["error"]
+
+        response = self.client.post("/timeline",
+                                    data={"name": "John Doe", "email": "name@email",
+                                          "content": "Hello world, I'm John!"})
+        assert response.status_code == 400
+        json = response.get_json()
+        assert json is not None and "error" in json
+        assert "Invalid email" in json["error"]
+
+        response = self.client.post("/timeline",
+                                    data={"name": "John Doe", "email": "name@email.c",
+                                          "content": "Hello world, I'm John!"})
+        assert response.status_code == 400
+        json = response.get_json()
+        assert json is not None and "error" in json
+        assert "Invalid email" in json["error"]
+
+        # POST request with malformed name
+        response = self.client.post("/timeline",
+                                    data={"name": "J0hn Doe", "email": "john@example.com",
+                                          "content": "Hello world, I'm John!"})
+        assert response.status_code == 400
+        json = response.get_json()
+        assert json is not None and "error" in json
+        assert "Invalid name" in json["error"]
+
+        response = self.client.post("/timeline",
+                                    data={"name": "John Doe!", "email": "john@example.com",
+                                          "content": "Hello world, I'm John!"})
+        assert response.status_code == 400
+        json = response.get_json()
+        assert json is not None and "error" in json
+        assert "Invalid name" in json["error"]
+
+        response = self.client.post("/timeline",
+                                    data={"name": "John Doe;", "email": "john@example.com",
+                                          "content": "Hello world, I'm John!"})
+        assert response.status_code == 400
+        json = response.get_json()
+        assert json is not None and "error" in json
+        assert "Invalid name" in json["error"]
+
+        response = self.client.post("/timeline",
+                                    data={"name": "John Doe123", "email": "john@example.com",
+                                          "content": "Hello world, I'm John!"})
+        assert response.status_code == 400
+        json = response.get_json()
+        assert json is not None and "error" in json
+        assert "Invalid name" in json["error"]
+
+        response = self.client.post("/timeline",
+                                    data={"name": "John Doe{}", "email": "john@example.com",
+                                          "content": "Hello world, I'm John!"})
+        assert response.status_code == 400
+        json = response.get_json()
+        assert json is not None and "error" in json
+        assert "Invalid name" in json["error"]
+
+        response = self.client.post("/timeline",
+                                    data={"name": "John Doe@", "email": "john@example.com",
+                                          "content": "Hello world, I'm John!"})
+        assert response.status_code == 400
+        json = response.get_json()
+        assert json is not None and "error" in json
+        assert "Invalid name" in json["error"]
+
+    def test_incorrect_route(self):
+        "Open a route that doesn't exist and check the return"
+        response = self.client.get("/non_existent_route")
+        assert response.status_code == 404
+        assert "Not Found" in response.get_data(as_text=True)
+        
+class AppApiTestCase(unittest.TestCase):
+    def setUp(self):
+        self.client = app.test_client()
+        
     def test_timeline_api(self):
         "Test all the timeline api endpoints"
         # test GET
@@ -196,8 +322,8 @@ class AppTestCase(unittest.TestCase):
         assert json is not None and "timeline_posts" in json
         assert len(json["timeline_posts"]) == 0
 
-    def test_malformed_timeline_post(self):
-        "Test api POST requests with malformed data"
+    def test_malformed_timeline_api_post(self):
+        "Test timeline api POST requests with malformed data"
         # POST request missing name
         response = self.client.post("/api/timeline_post",
                                     data={"email": "john@example.com", "content": "Hello world, I'm John!"})
@@ -311,12 +437,6 @@ class AppTestCase(unittest.TestCase):
         json = response.get_json()
         assert json is not None and "error" in json
         assert "Invalid name" in json["error"]
-
-    def test_incorrect_route(self):
-        "Open a route that doesn't exist and check the return"
-        response = self.client.get("/non_existent_route")
-        assert response.status_code == 404
-        assert "Not Found" in response.get_data(as_text=True)
 
 
 if __name__ == '__main__':
