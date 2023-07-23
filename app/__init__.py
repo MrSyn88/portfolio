@@ -166,7 +166,7 @@ def post_timeline_post():
     try:
         # try to send the POST request
         _ = handle_timeline_post(request.form)
-        return jsonify({"message": "Post successful"}), 200
+        return jsonify({"message": "Post successful"}), 201
 
     except InvalidPostException as e:
         return jsonify({"error": str(e)}), 400
