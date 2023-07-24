@@ -35,9 +35,9 @@ class AppTestCase(unittest.TestCase):
                 libero ut! Vitae voluptates deleniti, dignissimos repellendus, alias pariatur eos dolorum vero expedita
                 illum eum quod?''' in html    
         assert '<img width="125%" height="125%" src="./static/img/portrait.svg">' in html
-        assert 'The Places I Visted' in html
-        assert '''These places are New York, London, Tokyo, Berlin, Rome, Sydney, Moscow, Madrid, Toronto, Rio de Janeiro,
-            Santiago, Buenos Aires, Dubai, Beijing, San Francisco, Copenhagen, Melbourne, Seoul, and Sydney.''' in html   
+        assert 'Where I\'ve been' in html
+        assert "https://i.ibb.co/HCDh50Z/gps.png" in html  
+        assert "<strong>San Antonio</strong><p>Where I currently live</p>" in html 
         
     def test_education(self):
         "Open education and check it's content"

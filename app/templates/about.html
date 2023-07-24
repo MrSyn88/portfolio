@@ -1,5 +1,26 @@
 {% extends 'base.html' %}
-{% block content %}
+{% block head %}
+<script src="https://cdn.maptiler.com/maplibre-gl-js/v2.4.0/maplibre-gl.js"></script>
+<link href="https://cdn.maptiler.com/maplibre-gl-js/v2.4.0/maplibre-gl.css" rel="stylesheet" />
+<style>
+    body {
+        margin: 0;
+        padding: 0;
+    }
+
+    #map {
+        height: 400px;
+        width: 1000px;
+        border-radius: 10px;
+    }
+
+    .maplibregl-popup {
+        max-width: 400px;
+        font: 12px/20px 'Roboto', serif;
+    }
+</style>
+{% endblock %}
+{% block body %}
 <div class="profile">
     <h1>{{ title }}</h1>
 </div>
@@ -22,51 +43,208 @@
         </div>
     </div>
 </div>
-<div class="block">
+<div class="map-block">
     <div class="col-8 align-self-center">
         <h2>
-            The Places I Visted
+            Where I've been
         </h2>
-        <h4>
-            These places are New York, London, Tokyo, Berlin, Rome, Sydney, Moscow, Madrid, Toronto, Rio de Janeiro,
-            Santiago, Buenos Aires, Dubai, Beijing, San Francisco, Copenhagen, Melbourne, Seoul, and Sydney.
-        </h4>
     </div>
-    <div class="col-4 align-self-center" id="map"></div>
-    <script src="https://cdn.jsdelivr.net/npm/leaflet@1.7.1/dist/leaflet.js"></script>
-    <link rel="stylesheet" href="http://code.ionicframework.com/ionicons/1.5.2/css/ionicons.min.css">
+    <div class="col-4 align-self-center" id="map">
+    </div>
+    <a href="https://www.flaticon.com/free-icons/marker" title="marker icons" style="font-size: xx-small;">Marker icons created by Deylotus Creative
+        Design - Flaticon</a>
     <script>
-        var map = L.map('map').setView([0, 0], 2);
-        L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
-            attribution: 'Map data &copy; <a href="https://www.openstreetmap.org/">OpenStreetMap</a> contributors'
-        }).addTo(map);
-        var cityCoordinates = [
-            [40.7128, -74.0060],    // New York
-            [51.5074, -0.1278],     // London
-            [35.6895, 139.6917],    // Tokyo
-            [48.8566, 2.3522],      // Paris
-            [52.5200, 13.4050],     // Berlin
-            [41.9028, 12.4964],     // Rome
-            [-33.8651, 151.2099],   // Sydney
-            [55.7558, 37.6176],     // Moscow
-            [40.4168, -3.7038],     // Madrid
-            [43.6532, -79.3832],    // Toronto
-            [-22.9068, -43.1729],   // Rio de Janeiro
-            [-33.4489, -70.6693],   // Santiago
-            [-34.6037, -58.3816],   // Buenos Aires
-            [25.2048, 55.2708],     // Dubai
-            [39.9042, 116.4074],    // Beijing
-            [37.7749, -122.4194],   // San Francisco
-            [55.6761, 12.5683],     // Copenhagen
-            [-37.8136, 144.9631],   // Melbourne
-            [37.5665, 126.9780],    // Seoul
-            [-33.8675, 151.2070]    // Sydney
-        ];
+        const key = 'GI546B3SGnBV6vEau70S';
+        const map = new maplibregl.Map({
+            container: 'map',
+            style: `https://api.maptiler.com/maps/167a5f44-80cd-4b4b-99e6-a49b98dc4f9b/style.json?key=${key}`,
+            center: [-98.5795, 39.8282],
+            zoom: 3
+        });
 
-        // Mark the cities on the map
-        for (var i = 0; i < cityCoordinates.length; i++) {
-            var marker = L.marker(cityCoordinates[i]).addTo(map);
-        }
+        map.on('load', () => {
+            map.loadImage(
+                "https://i.ibb.co/HCDh50Z/gps.png",
+                // Add an image to use as a custom marker
+                (error, image) => {
+                    if (error) throw error;
+                    map.addImage('custom-marker', image);
+
+
+                    map.addSource('places', {
+                        'type': 'geojson',
+                        'data': {
+                            'type': 'FeatureCollection',
+                            'features': [
+                                {
+                                    'type': 'Feature',
+                                    'properties': {
+                                        'description':
+                                            '<strong>San Antonio</strong><p>Where I currently live</p>'
+                                    },
+                                    'geometry': {
+                                        'type': 'Point',
+                                        'coordinates': [-98.493628, 29.424122]
+                                    }
+                                },
+                                {
+                                    'type': 'Feature',
+                                    'properties': {
+                                        'description':
+                                            '<strong>Salt Lake City</strong><p>Where my girlfriend lives</p>'
+                                    },
+                                    'geometry': {
+                                        'type': 'Point',
+                                        'coordinates': [-111.891047, 40.760779]
+                                    }
+                                },
+                                {
+                                    'type': 'Feature',
+                                    'properties': {
+                                        'description':
+                                            '<strong>Yellowstone National Park</strong><p>Went here as a kid and did the junior ranger challenge</p>'
+                                    },
+                                    'geometry': {
+                                        'type': 'Point',
+                                        'coordinates': [-110.499898, 44.598885]
+                                    }
+                                },
+                                {
+                                    'type': 'Feature',
+                                    'properties': {
+                                        'description':
+                                            '<strong>Los Angeles</strong><p>So.Much.Traffic</p>'
+                                    },
+                                    'geometry': {
+                                        'type': 'Point',
+                                        'coordinates': [-118.243683, 34.052235]
+                                    }
+                                },
+                                {
+                                    'type': 'Feature',
+                                    'properties': {
+                                        'description':
+                                            '<strong>Kansas City</strong><p>Went here all the time when I lived in Overland Park</p>'
+                                    },
+                                    'geometry': {
+                                        'type': 'Point',
+                                        'coordinates': [-94.578567, 39.099727]
+                                    }
+                                },
+                                {
+                                    'type': 'Feature',
+                                    'properties': {
+                                        'description':
+                                            '<strong>Hershey\'s Chocolate World!</strong><p>Much Chocolate</p>'
+                                    },
+                                    'geometry': {
+                                        'type': 'Point',
+                                        'coordinates': [-76.660246, 40.288359]
+                                    }
+                                },
+                                {
+                                    'type': 'Feature',
+                                    'properties': {
+                                        'description':
+                                            '<strong>Dallas</strong><p>I love going to Dallas. Also, my old children\'s hospital is located here</p>'
+                                    },
+                                    'geometry': {
+                                        'type': 'Point',
+                                        'coordinates': [-96.796988, 32.776664]
+                                    }
+                                },
+                                {
+                                    'type': 'Feature',
+                                    'properties': {
+                                        'description':
+                                            '<strong>Keller</strong><p>Where I lived before I moved to Kansas</p>'
+                                    },
+                                    'geometry': {
+                                        'type': 'Point',
+                                        'coordinates': [-97.229298, 32.934189]
+                                    }
+                                },
+                                {
+                                    'type': 'Feature',
+                                    'properties': {
+                                        'description':
+                                            '<strong>Overland Park</strong><p>I lived here for most of my childhood</p>'
+                                    },
+                                    'geometry': {
+                                        'type': 'Point',
+                                        'coordinates': [-94.670792, 38.982228]
+                                    }
+                                },
+                                {
+                                    'type': 'Feature',
+                                    'properties': {
+                                        'description':
+                                            '<strong>Destin</strong><p>I went here once on vacation with a church group</p>'
+                                    },
+                                    'geometry': {
+                                        'type': 'Point',
+                                        'coordinates': [-86.495783, 30.393534]
+                                    }
+                                },
+                                {
+                                    'type': 'Feature',
+                                    'properties': {
+                                        'description':
+                                            '<strong>Cedar Point</strong><p>I remember going to this amusement park as a kid. Lots of Peanuts characters</p>'
+                                    },
+                                    'geometry': {
+                                        'type': 'Point',
+                                        'coordinates': [-82.683445, 41.480790]
+                                    }
+                                }
+                            ]
+                        }
+                    });
+
+                    // Add a layer showing the places.
+                    map.addLayer({
+                        'id': 'places',
+                        'type': 'symbol',
+                        'source': 'places',
+                        'layout': {
+                            'icon-image': 'custom-marker',
+                            'icon-overlap': 'always'
+                        }
+                    });
+                }
+            );
+
+
+            // Create a popup, but don't add it to the map yet.
+            const popup = new maplibregl.Popup({
+                closeButton: false,
+                closeOnClick: false
+            });
+
+            map.on('mouseenter', 'places', (e) => {
+                // Change the cursor style as a UI indicator.
+                map.getCanvas().style.cursor = 'pointer';
+
+                const coordinates = e.features[0].geometry.coordinates.slice();
+                const description = e.features[0].properties.description;
+
+                // Ensure that if the map is zoomed out such that multiple
+                // copies of the feature are visible, the popup appears
+                // over the copy being pointed to.
+                while (Math.abs(e.lngLat.lng - coordinates[0]) > 180) {
+                    coordinates[0] += e.lngLat.lng > coordinates[0] ? 360 : -360;
+                }
+
+                // Populate the popup and set its coordinates
+                // based on the feature found.
+                popup.setLngLat(coordinates).setHTML(description).addTo(map);
+            });
+
+            map.on('mouseleave', 'places', () => {
+                map.getCanvas().style.cursor = '';
+                popup.remove();
+            });
+        });
     </script>
 </div>
 {% endblock %}

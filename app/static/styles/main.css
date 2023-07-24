@@ -168,6 +168,20 @@ body {
     padding: 20px;
 }
 
+.map-block {
+    background-color: #fff;
+    padding: 20px;
+    margin-bottom: 50px;
+    margin-left: auto;
+    margin-right: auto;
+    border: solid 1px #eee;
+    border-radius: 10px;
+    box-shadow: 0px 3px 5px 5px #e7e6e6;
+    max-width: 1200px;
+    padding-left: 10px;
+    padding-right: 10px;
+}
+
 .bottom {
     display: flex;
     color: grey;
