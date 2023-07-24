@@ -16,8 +16,8 @@ class AppTestCase(unittest.TestCase):
         response = self.client.get("/")
         assert response.status_code == 200
         html = response.get_data(as_text=True)
-        assert "<title>Nicolas S. Ruiz</title>" in html
-        assert '<img width="125%" height="125%" src="./static/img/portrait.svg">' in html
+        assert "<title>Home</title>" in html
+        assert '<img width="125%" height="125%" src="https://i.ibb.co/bPv8jxc/me1.jpg">' in html
         assert 'TL;DR' in html
         assert '''Lorem ipsum dolor sit amet consectetur, adipisicing elit. Dolores illum omnis, perspiciatis nisi
                 accusantium libero ut! Vitae voluptates deleniti, dignissimos repellendus, alias pariatur eos dolorum
@@ -34,7 +34,7 @@ class AppTestCase(unittest.TestCase):
                 accusantium
                 libero ut! Vitae voluptates deleniti, dignissimos repellendus, alias pariatur eos dolorum vero expedita
                 illum eum quod?''' in html    
-        assert '<img width="125%" height="125%" src="./static/img/portrait.svg">' in html
+        assert '<img width="125%" height="125%" src="https://i.ibb.co/wdgbZr6/bros.jpg"">' in html
         assert 'Where I\'ve been' in html
         assert "https://i.ibb.co/HCDh50Z/gps.png" in html  
         assert "<strong>San Antonio</strong><p>Where I currently live</p>" in html 
@@ -70,11 +70,9 @@ class AppTestCase(unittest.TestCase):
         assert response.status_code == 200
         html = response.get_data(as_text=True)
         assert "<title>Hobbies</title>" in html
-        assert '<img src="./static/img/hobbies.jpg">' in html
-        assert '''Lorem ipsum dolor sit amet consectetur adipisicing elit. Sit distinctio nesciunt eligendi
-                        eveniet,
-                        autem facere libero sed consectetur quos nihil consequatur? Commodi dolorem explicabo accusamus!
-                        Possimus fuga minima quaerat vitae.''' in html   
+        assert 'Learning Instruments' in html
+        assert 'Attending Hackathons' in html
+        assert 'Mechanical Keyboards' in html
         
     def test_timeline_route(self):
         "Open timeline, check it's content, post, and check again"

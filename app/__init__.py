@@ -92,7 +92,7 @@ def getGrav(email):
 def index():
     try:
         #attempt to render the page
-        return render_template('index.html', title="Nicolas S. Ruiz", url=os.getenv("URL"))
+        return render_template('index.html', title="Home", url=os.getenv("URL"))
     except Exception as e:
         # Log the exception for debugging purposes if needed
         print(e)
