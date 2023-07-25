@@ -17,7 +17,7 @@ class AppTestCase(unittest.TestCase):
         assert response.status_code == 200
         html = response.get_data(as_text=True)
         assert "<title>Home</title>" in html
-        assert '<img width="125%" height="125%" src="https://i.ibb.co/bPv8jxc/me1.jpg">' in html
+        assert '<img width="125%" height="125%" src="https://i.ibb.co/bPv8jxc/me1.jpg" alt="Home Page Portrait">' in html
         assert 'TL;DR' in html
         assert '''Lorem ipsum dolor sit amet consectetur, adipisicing elit. Dolores illum omnis, perspiciatis nisi
                 accusantium libero ut! Vitae voluptates deleniti, dignissimos repellendus, alias pariatur eos dolorum
@@ -34,10 +34,10 @@ class AppTestCase(unittest.TestCase):
                 accusantium
                 libero ut! Vitae voluptates deleniti, dignissimos repellendus, alias pariatur eos dolorum vero expedita
                 illum eum quod?''' in html    
-        assert '<img width="125%" height="125%" src="https://i.ibb.co/wdgbZr6/bros.jpg"">' in html
+        assert '<img width="125%" height="125%" src="https://i.ibb.co/wdgbZr6/bros.jpg" alt="Photo with brothers">' in html
         assert 'Where I\'ve been' in html
-        assert "https://i.ibb.co/HCDh50Z/gps.png" in html  
-        assert "<strong>San Antonio</strong><p>Where I currently live</p>" in html 
+        assert "<script src=\"https://cdn.maptiler.com/maplibre-gl-js/v2.4.0/maplibre-gl.js\"></script>" in html  
+        assert "js/map_script.js" in html 
         
     def test_education(self):
         "Open education and check it's content"
@@ -45,9 +45,9 @@ class AppTestCase(unittest.TestCase):
         assert response.status_code == 200
         html = response.get_data(as_text=True)
         assert "<title>Education</title>" in html
-        assert '<img src="https://i.ibb.co/z616WGw/school2.jpg" alt="school2" border="0">' in html
+        assert '<img src="https://i.ibb.co/z616WGw/school2.jpg" alt="school2" border="0" alt="UTSA">' in html
         assert "The University of Texas at San Antonio" in html 
-        assert '<img src="https://i.ibb.co/7Qt4DbQ/school1.jpg" alt="school1" border="0">' in html
+        assert '<img src="https://i.ibb.co/7Qt4DbQ/school1.jpg" alt="school1" border="0" alt="Smithson Valley High School">' in html
         assert "Smithson Valley High school" in html 
         
     def test_projects(self):
