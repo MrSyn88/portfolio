@@ -37,19 +37,16 @@ jobs:
       run: |
         chmod +x ./run-test.sh
         ./run-test.sh
-    - name: Create SSH key
+    - name: Create SSH key and Deploy
       if: steps.tests.outcome == 'success'
       run: |
         mkdir -p ~/.ssh/
         echo "$SSH_PRIVATE_KEY" > ../private.key
         sudo chmod 600 ../private.key
         echo "$SSH_KNOWN_HOSTS" > ~/.ssh/known_hosts
+        ssh -i $SSH_KEY_PATH root@${{secrets.SSH_HOSTNAME}} './redeploy.sh'
       shell: bash
       env:
         SSH_PRIVATE_KEY: ${{secrets.SSH_PRIVATE_KEY}}
         SSH_KNOWN_HOSTS: ${{secrets.SSH_KNOWN_HOSTS}}
         SSH_KEY_PATH: ${{ github.workspace }}/../private.key
-    - name: Deploy to production server
-      if: steps.tests.outcome == 'success'
-      run: |
-        ssh -i $SSH_KEY_PATH root@${{secrets.SSH_HOSTNAME}} './redeploy.sh'
