@@ -338,6 +338,409 @@
                     37.211638
                 ]
             }
+        },
+        {
+            "type": "Feature",
+            "properties": {
+                "description": "<strong>Indiana</strong><p>The hoosier state</p>"
+            },
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    -86.134902,
+                    40.267194
+                ]
+            }
+        },
+        {
+            "type": "Feature",
+            "properties": {
+                "description": "<strong>Ohio</strong><p>The buckeye state</p>"
+            },
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    -82.907123,
+                    40.417287
+                ]
+            }
+        },
+        {
+            "type": "Feature",
+            "properties": {
+                "description": "<strong>Pennsylvania</strong><p>The keystone state</p>"
+            },
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    -77.194525,
+                    41.203322
+                ]
+            }
+        },
+        {
+            "type": "Feature",
+            "properties": {
+                "description": "<strong>New Jersey</strong><p>The garden state</p>"
+            },
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    -74.405661,
+                    40.058324
+                ]
+            }
+        },
+        {
+            "type": "Feature",
+            "properties": {
+                "description": "<strong>Virginia</strong><p>The old dominion state</p>"
+            },
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    -78.656894,
+                    37.431573
+                ]
+            }
+        },
+        {
+            "type": "Feature",
+            "properties": {
+                "description": "<strong>West Virginia</strong><p>The mountain state</p>"
+            },
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    -80.454903,
+                    38.597626
+                ]
+            }
+        },
+        {
+            "type": "Feature",
+            "properties": {
+                "description": "<strong>Kentucky</strong><p>The bluegrass state</p>"
+            },
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    -84.270018,
+                    37.839333
+                ]
+            }
+        },
+        {
+            "type": "Feature",
+            "properties": {
+                "description": "<strong>Tennessee</strong><p>The volunteer state</p>"
+            },
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    -86.580447,
+                    35.517491
+                ]
+            }
+        },
+        {
+            "type": "Feature",
+            "properties": {
+                "description": "<strong>Missouri</strong><p>The show me state</p>"
+            },
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    -91.831833,
+                    37.964253
+                ]
+            }
+        },
+        {
+            "type": "Feature",
+            "properties": {
+                "description": "<strong>Oklahoma</strong><p>The sooner state</p>"
+            },
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    -97.504761,
+                    35.473868
+                ]
+            }
+        },
+        {
+            "type": "Feature",
+            "properties": {
+                "description": "<strong>Colorado</strong><p>The centennial state</p>"
+            },
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    -105.782067,
+                    39.550051
+                ]
+            }
+        },
+        {
+            "type": "Feature",
+            "properties": {
+                "description": "<strong>Nevada</strong><p>The silver state</p>"
+            },
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    -116.419389,
+                    38.802610
+                ]
+            }
+        },
+        {
+            "type": "Feature",
+            "properties": {
+                "description": "<strong>California</strong><p>The golden state</p>"
+            },
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    -119.417932,
+                    36.778261
+                ]
+            }
+        },
+        {
+            "type": "Feature",
+            "properties": {
+                "description": "<strong>Arizona</strong><p>The grand canyon state</p>"
+            },
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    -111.093731,
+                    34.048928
+                ]
+            }
+        },
+        {
+            "type": "Feature",
+            "properties": {
+                "description": "<strong>New Mexico</strong><p>The land of enchantment</p>"
+            },
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    -105.870090,
+                    34.519940
+                ]
+            }
+        },
+        {
+            "type": "Feature",
+            "properties": {
+                "description": "<strong>Maryland</strong><p>The old line state</p>"
+            },
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    -76.641271,
+                    39.045755
+                ]
+            }
+        },
+        {
+            "type": "Feature",
+            "properties": {
+                "description": "<strong>Hoover Dam</strong><p>A lot bigger in person</p>"
+            },
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    -114.737732,
+                    36.016066
+                ]
+            }
+        },
+        {
+            "type": "Feature",
+            "properties": {
+                "description": "<strong>Hualapi Indian Reservation</strong><p>Their culture fascinated me as a kid. I also saw some fossils and got an arrowhead from them</p>"
+            },
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    -113.500493,
+                    35.749710
+                ]
+            }
+        },
+        {
+            "type": "Feature",
+            "properties": {
+                "description": "<strong>Liberty Bell</strong><p>Live Más</p>"
+            },
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    -75.150282,
+                    39.949610
+                ]
+            }
+        },
+        {
+            "type": "Feature",
+            "properties": {
+                "description": "<strong>Washington DC</strong><p>I hate the subway escalators</p>"
+            },
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    -77.036871,
+                    38.907192
+                ]
+            }
+        },
+        {
+            "type": "Feature",
+            "properties": {
+                "description": "<strong>The White House</strong><p>I got to sit in the oval office</p>"
+            },
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    -77.036530,
+                    38.897676
+                ]
+            }
+        },
+        {
+            "type": "Feature",
+            "properties": {
+                "description": "<strong>Gateway Arch</strong><p>It made me feel tiny</p>"
+            },
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    -90.184776,
+                    38.624691
+                ]
+            }
+        },
+        {
+            "type": "Feature",
+            "properties": {
+                "description": "<strong>Grand Canyon</strong><p>My brother almost pushed me off the edge</p>"
+            },
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    -112.112997,
+                    36.106965
+                ]
+            }
+        },
+        {
+            "type": "Feature",
+            "properties": {
+                "description": "<strong>Grand Teton National Park</strong><p>Big mountain</p>"
+            },
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    -110.802436,
+                    43.741042
+                ]
+            }
+        },
+        {
+            "type": "Feature",
+            "properties": {
+                "description": "<strong>Great Smoky Mountains National Park</strong><p>I went ATV riding and went ziplining</p>"
+            },
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    -83.507020,
+                    35.653194
+                ]
+            }
+        },
+        {
+            "type": "Feature",
+            "properties": {
+                "description": "<strong>Shenandoah National Park</strong><p>Some bears got really close to our car</p>"
+            },
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    -78.292694,
+                    38.700516
+                ]
+            }
+        },
+        {
+            "type": "Feature",
+            "properties": {
+                "description": "<strong>Four Corners Monument</strong><p>I was in four states at the same time</p>"
+            },
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    -109.045183,
+                    36.998978
+                ]
+            }
+        },
+        {
+            "type": "Feature",
+            "properties": {
+                "description": "<strong>Crazy Horse Memorial</strong><p>They took us right up to the mountain but we had to wear hard hats</p>"
+            },
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    -103.623416,
+                    43.836568
+                ]
+            }
+        },
+        {
+            "type": "Feature",
+            "properties": {
+                "description": "<strong>Devils Tower</strong><p>I remember being glad I went there before seeing close encounters of the third kind</p>"
+            },
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    -104.698546,
+                    44.588646
+                ]
+            }
+        },
+        {
+            "type": "Feature",
+            "properties": {
+                "description": "<strong>Custer State Park</strong><p>I got to see some buffalo</p>"
+            },
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    -103.370325,
+                    43.761568
+                ]
+            }
+        },
+        {
+            "type": "Feature",
+            "properties": {
+                "description": "<strong>Williamsburg</strong><p>I went here around the same time I went to the Jamestown Settlement</p>"
+            },
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    -76.707457,
+                    37.270702
+                ]
+            }
         }
     ]
 }
