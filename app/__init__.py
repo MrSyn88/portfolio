@@ -13,7 +13,7 @@ NAME_PATTERN = r'^[a-zA-Z\s\'\-]+$'
 EMAIL_PATTERN = r'^[\w\.-]+@[a-zA-Z\d\.-]+\.[a-zA-Z]{2,}$'
 
 load_dotenv()
-app = Flask(__name__)
+app = Flask(__name__, static_url_path='/static')
 
 if os.getenv("TESTING") == "true":
     print("Running in test mode")
