@@ -29,6 +29,9 @@ jobs:
           if [ -f requirements.txt ] 
           then 
             pip install -r requirements.txt
+          else
+            pip freeze > requirements.txt
+            pip install -r requirements.txt
           fi
           
       - name: Test with unittest
@@ -42,7 +45,7 @@ jobs:
       - name: Checkout Repository
         uses: actions/checkout@v2
 
-      - name: Create SSH key and Deploy
+      - name: Create SSH key
         run: |
           mkdir -p ~/.ssh/
           echo "$SSH_PRIVATE_KEY" > ../private.key
@@ -53,4 +56,16 @@ jobs:
         env:
           SSH_PRIVATE_KEY: ${{secrets.SSH_PRIVATE_KEY}}
           SSH_KNOWN_HOSTS: ${{secrets.SSH_KNOWN_HOSTS}}
+          SSH_KEY_PATH: ${{ github.workspace }}/../private.key
+          
+      - name: Run Deploy Script
+        run: ssh -i $SSH_KEY_PATH root@${{secrets.SSH_HOSTNAME}} './redeploy-site.sh'
+        shell: bash
+        env:
+          SSH_KEY_PATH: ${{ github.workspace }}/../private.key
+      
+      - name: Check Status
+        run: ssh -i $SSH_KEY_PATH root@${{secrets.SSH_HOSTNAME}} 'docker-compose ps'
+        shell: bash
+        env:
           SSH_KEY_PATH: ${{ github.workspace }}/../private.key
