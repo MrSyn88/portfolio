@@ -65,7 +65,7 @@ jobs:
           SSH_KEY_PATH: ${{ github.workspace }}/../private.key
       
       - name: Check Status
-        run: ssh -i $SSH_KEY_PATH root@${{secrets.SSH_HOSTNAME}} 'docker-compose ps'
+        run: ssh -i $SSH_KEY_PATH root@${{secrets.SSH_HOSTNAME}} 'docker compose ps'
         shell: bash
         env:
           SSH_KEY_PATH: ${{ github.workspace }}/../private.key
