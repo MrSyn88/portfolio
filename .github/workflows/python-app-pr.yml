@@ -7,9 +7,6 @@ on:
   pull_request:
     branches: [ "main" ]
 
-permissions:
-  contents: read
-
 jobs:
   test:
     runs-on: ubuntu-latest
@@ -29,7 +26,12 @@ jobs:
         run : python -m venv python3-virtualenv
 
       - name: Install dependencies
-        run: python3-virtualenv/bin/pip install -r requirements.txt 
+        run: |
+          python3 -m pip install --upgrade pip
+          if [ -f requirements.txt ] 
+          then 
+            pip install -r requirements.txt
+          fi
           
       - name: Test with unittest
         run: ./run-test.sh
