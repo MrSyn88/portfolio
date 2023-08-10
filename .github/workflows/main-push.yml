@@ -34,6 +34,10 @@ jobs:
           
       - name: Test with unittest
         run: ./run-test.sh
+        
+      - name: Send Testing Failure Message
+        if: failure()
+        run: curl -s -X POST "${{ secrets.DISCORD_WEBHOOK }}" -d "content=🚨 Testing Failed"
 
   deploy:
     needs: test
@@ -67,3 +71,10 @@ jobs:
         shell: bash
         env:
           SSH_KEY_PATH: ${{ github.workspace }}/../private.key
+          
+      - name: Send Deployment Success Message
+        run: curl -s -X POST "${{ secrets.DISCORD_WEBHOOK }}" -d "content=🚀 Deployment Successfu! embeds=https://nico-ruiz.duckdns.org/"
+          
+      - name: Send Deployment Failure Message
+        if: failure()
+        run: curl -s -X POST "${{ secrets.DISCORD_WEBHOOK }}" -d "content=🚨 Deployment Failed"
