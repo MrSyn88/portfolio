@@ -73,7 +73,7 @@ jobs:
           SSH_KEY_PATH: ${{ github.workspace }}/../private.key
           
       - name: Send Deployment Success Message
-        run: curl -s -X POST "${{ secrets.DISCORD_WEBHOOK }}" -d "content=🚀 Deployment Successfu! embeds=https://nico-ruiz.duckdns.org/"
+        run: curl -s -X POST "${{ secrets.DISCORD_WEBHOOK }}" -d "content=🚀 Deployment Successful! %0A https://nico-ruiz.duckdns.org/"
           
       - name: Send Deployment Failure Message
         if: failure()
