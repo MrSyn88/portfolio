@@ -1,4 +1,14 @@
 {% extends 'base.html' %}
+{% block nav %}
+<nav class="navbar">
+    <a href="/">Home</a>
+    <a href="/about" class="active">About</a>
+    <a href="/education">Education</a>
+    <a href="/projects">Projects</a>
+    <a href="/hobbies">Hobbies</a>
+    <a href="/timeline">Timeline</a>
+</nav>
+{% endblock %}
 {% block head %}
 <script src="https://cdn.maptiler.com/maplibre-gl-js/v2.4.0/maplibre-gl.js"></script>
 <link href="https://cdn.maptiler.com/maplibre-gl-js/v2.4.0/maplibre-gl.css" rel="stylesheet" />
@@ -9,7 +19,7 @@
     }
 
     #map {
-        height: 400px;
+        height: 800px;
         width: 1000px;
         border-radius: 10px;
     }
@@ -22,35 +32,34 @@
 {% endblock %}
 {% block body %}
 
-<div class="block">
-    <div class="row">
-        <div class="col-8 align-self-center">
-            <h2>
-                About Me
-            </h2>
-            <h4>
-                Lorem ipsum dolor sit amet consectetur, adipisicing elit. Dolores illum omnis, perspiciatis nisi
-                accusantium
-                libero ut! Vitae voluptates deleniti, dignissimos repellendus, alias pariatur eos dolorum vero expedita
-                illum eum quod?
-            </h4>
-        </div>
-        <div class="col-4 align-self-center">
-            <img width="125%" height="125%" src="https://i.ibb.co/wdgbZr6/bros.jpg" alt="Photo with brothers">
-        </div>
+<section class="about" id="about">
+    <div class="about-img">
+        <img src="https://i.ibb.co/ccT9tVM/bros.jpg" alt="Photo with brothers">
     </div>
-</div>
-<div class="map-block">
-    <div class="col-8 align-self-center">
-        <h2>
-            Where I've been
-        </h2>
+
+    <div class="about-content">
+        <h2 class="heading">About <span>Me</span></h2>
+        <h3>Production Engineer</h3>
+        <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Provident explicabo cumque dignissimos odit? Rem
+            vitae
+            inventore saepe doloremque? Dicta laboriosam quod in impedit deserunt voluptate. Excepturi temporibus
+            cupiditate
+            accusamus iusto quae nihil laboriosam quasi, nobis debitis voluptatem hic? Nulla eligendi et, nam earum
+            excepturi tempora? Enim.</p>
+        <a href="" class="btn">Read More</a>
     </div>
-    <div class="col-4 align-self-center" id="map"></div>
+</section>
+
+<section class="map-section" id="map-section">
+    <h2 class="heading">Where I've <span>been</span></h2>
+    <div id="map"></div>
     <div class="attribution">
-        <a href="https://www.flaticon.com/free-icons/marker" title="marker icons">Marker icons created by Deylotus Creative
-        Design - Flaticon</a>
+        <a href="https://www.flaticon.com/free-icons/marker" title="marker icons">Marker icons created by Deylotus
+            Creative
+            Design - Flaticon</a>
     </div>
     <script src="{{ url_for('static', filename='js/map_script.js') }}"></script>
-</div>
+    <i class='bx bxs-down-arrow-circle' id="down-arrow"></i>
+</section>
+
 {% endblock %}

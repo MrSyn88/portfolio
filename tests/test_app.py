@@ -17,11 +17,11 @@ class AppTestCase(unittest.TestCase):
         assert response.status_code == 200
         html = response.get_data(as_text=True)
         assert "<title>Home</title>" in html
-        assert '<img width="125%" height="125%" src="https://i.ibb.co/bPv8jxc/me1.jpg" alt="Home Page Portrait">' in html
-        assert 'TL;DR' in html
-        assert '''Lorem ipsum dolor sit amet consectetur, adipisicing elit. Dolores illum omnis, perspiciatis nisi
-                accusantium libero ut! Vitae voluptates deleniti, dignissimos repellendus, alias pariatur eos dolorum
-                vero expedita illum eum quod?''' in html
+        assert '<img src="https://i.ibb.co/9wxwvLF/profile-square.jpg" alt="Home Page Portrait">' in html
+        assert 'Production Engineer' in html
+        assert '''Lorem ipsum, dolor sit amet consectetur adipisicing elit. Ab error ut doloremque fugit odit recusandae nobis
+            adipisci?''' in html
+        assert '<div href="" class="btn">Download Resume</div>' in html
                 
     def test_about(self):
         "Open about and check it's content"
@@ -29,13 +29,15 @@ class AppTestCase(unittest.TestCase):
         assert response.status_code == 200
         html = response.get_data(as_text=True)
         assert "<title>About</title>" in html
-        assert "About Me" in html
-        assert '''Lorem ipsum dolor sit amet consectetur, adipisicing elit. Dolores illum omnis, perspiciatis nisi
-                accusantium
-                libero ut! Vitae voluptates deleniti, dignissimos repellendus, alias pariatur eos dolorum vero expedita
-                illum eum quod?''' in html    
-        assert '<img width="125%" height="125%" src="https://i.ibb.co/wdgbZr6/bros.jpg" alt="Photo with brothers">' in html
-        assert 'Where I\'ve been' in html
+        assert "About <span>Me</span>" in html
+        assert '''Lorem ipsum dolor sit amet consectetur adipisicing elit. Provident explicabo cumque dignissimos odit? Rem
+            vitae
+            inventore saepe doloremque? Dicta laboriosam quod in impedit deserunt voluptate. Excepturi temporibus
+            cupiditate
+            accusamus iusto quae nihil laboriosam quasi, nobis debitis voluptatem hic? Nulla eligendi et, nam earum
+            excepturi tempora? Enim.''' in html    
+        assert '<img src="https://i.ibb.co/ccT9tVM/bros.jpg" alt="Photo with brothers">' in html
+        assert "Where I've <span>been</span>" in html
         assert "<script src=\"https://cdn.maptiler.com/maplibre-gl-js/v2.4.0/maplibre-gl.js\"></script>" in html  
         assert "js/map_script.js" in html 
         
