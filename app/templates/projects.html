@@ -10,58 +10,35 @@
 </nav>
 {% endblock %}
 {% block body %}
-<div class="block">
-    <div class="row">
-        <div class="col-4 align-self-center">
-            <img src="{{ url_for('static', filename='img/work.jpg') }}" alt="Work">
+<section class="projects" id="projects">
+    <h2 class="heading">Latest <span>Projects</span></h2>
+
+    <div class="projects-container">
+        <div class="projects-box">
+            <img src="https://i.ibb.co/fQBcGc7/Rowd-E-Books.png" alt="Rowd-E-Books">
+            <div class="projects-layer">
+                <h4>RowdE-Books</h4>
+                <p>An online store for books made for Software Engineering at UTSA.</p>
+                <a href="https://github.com/MrSyn88/RowdE-Books"><i class='bx bx-link-external'></i></a>
+            </div>
         </div>
-        <div class="col-8 align-self-center">
-            <h2>
-                My Past Work Experience
-            </h2>
-            <h4>
-                Lorem ipsum dolor sit amet consectetur, adipisicing elit. Dolores illum omnis, perspiciatis nisi
-                accusantium
-                libero ut! Vitae voluptates deleniti, dignissimos repellendus, alias pariatur eos dolorum vero expedita
-                illum eum quod?
-            </h4>
+        <div class="projects-box">
+            <img src="https://i.ibb.co/JFr382c/Cryptid-Coin.png" alt="Cryptid-Coin">
+            <div class="projects-layer">
+                <h4>CryptidCoin</h4>
+                <p>Venture into the unknown and collect all your favorite cryptids.</p>
+                <a href="https://devpost.com/software/cryptidcoin"><i class='bx bx-link-external'></i></a>
+            </div>
         </div>
-    </div>
-</div>
-<div class="block">
-    <div class="row">
-        <div class="col-4 align-self-center">
-            <img src="{{ url_for('static', filename='img/project1.jpg') }}" alt="Project 1">
-        </div>
-        <div class="col-8 align-self-center">
-            <h2>
-                Project 1
-            </h2>
-            <h4>
-                Lorem ipsum dolor sit amet consectetur, adipisicing elit. Dolores illum omnis, perspiciatis nisi
-                accusantium
-                libero ut! Vitae voluptates deleniti, dignissimos repellendus, alias pariatur eos dolorum vero expedita
-                illum eum quod?
-            </h4>
+        <div class="projects-box">
+            <img src="https://i.ibb.co/GMzrpqF/Social-Circle.jpg" alt="Social-Circle">
+            <div class="projects-layer">
+                <h4>Social Circle</h4>
+                <p>A simple social media app that allows users to log in and submit text messages to a board for others
+                    to see</p>
+                <a href="https://devpost.com/software/social-circle"><i class='bx bx-link-external'></i></a>
+            </div>
         </div>
     </div>
-</div>
-<div class="block">
-    <div class="row">
-        <div class="col-8 align-self-center">
-            <h2>
-                Project 2
-            </h2>
-            <h4>
-                Lorem ipsum dolor sit amet consectetur, adipisicing elit. Dolores illum omnis, perspiciatis nisi
-                accusantium
-                libero ut! Vitae voluptates deleniti, dignissimos repellendus, alias pariatur eos dolorum vero expedita
-                illum eum quod?
-            </h4>
-        </div>
-        <div class="col-4 align-self-center">
-            <img src="{{ url_for('static', filename='img/project2.jpg') }}" alt="Project 2">
-        </div>
-    </div>
-</div>
+</section>
 {% endblock %}

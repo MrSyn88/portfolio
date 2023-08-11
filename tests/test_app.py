@@ -59,13 +59,11 @@ class AppTestCase(unittest.TestCase):
         assert response.status_code == 200
         html = response.get_data(as_text=True)
         assert "<title>Projects</title>" in html
-        assert "My Past Work Experience" in html
-        assert '''Lorem ipsum dolor sit amet consectetur, adipisicing elit. Dolores illum omnis, perspiciatis nisi
-                accusantium
-                libero ut! Vitae voluptates deleniti, dignissimos repellendus, alias pariatur eos dolorum vero expedita
-                illum eum quod?''' in html
-        assert 'Project 1' in html
-        assert 'Project 2' in html
+        assert "Latest <span>Projects</span>" in html
+        assert "Venture into the unknown and collect all your favorite cryptids." in html
+        assert 'RowdE-Books' in html
+        assert 'CryptidCoin' in html
+        assert 'Social Circle' in html
 
     def test_hobbies(self):
         "Open hobbies and check it's content"
