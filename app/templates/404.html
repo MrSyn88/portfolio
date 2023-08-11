@@ -4,21 +4,16 @@
     <a href="/">Home</a>
     <a href="/about">About</a>
     <a href="/education">Education</a>
-    <a href="/projects">Projects</a>
-    <a href="/hobbies">Hobbies</a>
+    <a href="/pnh">Projects & Hobbies</a>
     <a href="/timeline">Timeline</a>
 </nav>
 {% endblock %}
 {% block body %}
-<div class="container" style="justify-content: center;">
-    <div class="row">
-        <h1>404 - Page Not Found</h1>
-    </div>
-    <div class="row">
-        <p>
-            Sorry, we couldn't find the page you're looking for.
-            It may have been mis-spelled, or it doesn't exist anymore.
-        </p>
-    </div>
-</div>
+<section class="error-404" id="error-404">
+    <h2 class="heading"><span>404</span> - Page Not Found</h2>
+    <p>
+        Sorry, we couldn't find the page you're looking for.
+        It may have been mis-spelled, or it doesn't exist anymore.
+    </p>
+</section>
 {% endblock %}

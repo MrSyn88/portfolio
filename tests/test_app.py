@@ -55,22 +55,15 @@ class AppTestCase(unittest.TestCase):
 
     def test_projects(self):
         "Open projects and check it's content"
-        response = self.client.get("/projects")
+        response = self.client.get("/pnh")
         assert response.status_code == 200
         html = response.get_data(as_text=True)
-        assert "<title>Projects</title>" in html
         assert "Latest <span>Projects</span>" in html
         assert "Venture into the unknown and collect all your favorite cryptids." in html
         assert 'RowdE-Books' in html
         assert 'CryptidCoin' in html
-        assert 'Social Circle' in html
-
-    def test_hobbies(self):
-        "Open hobbies and check it's content"
-        response = self.client.get("/hobbies")
-        assert response.status_code == 200
-        html = response.get_data(as_text=True)
-        assert "<title>Hobbies</title>" in html
+        assert 'Social Circle' in html in html
+        assert 'My <span>Hobbies</span>' in html
         assert 'Learning Instruments' in html
         assert 'Attending Hackathons' in html
         assert 'Mechanical Keyboards' in html

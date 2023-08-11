@@ -112,18 +112,6 @@ def about():
         return render_template('error.html', title="Error", message="An error occurred.")
 
 
-@app.route('/hobbies')
-def hobbies():
-    try:
-        # attempt to render the page
-        return render_template('hobbies.html', title="Hobbies", url=os.getenv("URL"))
-    except Exception as e:
-        # Log the exception for debugging purposes if needed
-        print(e)
-        # Render the error template
-        return render_template('error.html', title="Error", message="An error occurred.")
-
-
 @app.route('/education')
 def education():
     try:
@@ -136,11 +124,11 @@ def education():
         return render_template('error.html', title="Error", message="An error occurred.")
 
 
-@app.route('/projects')
+@app.route('/pnh')
 def projects():
     try:
         # attempt to render the page
-        return render_template('projects.html', title="Projects", url=os.getenv("URL"))
+        return render_template('pnh.html', title="Projects & Hobbies", url=os.getenv("URL"))
     except Exception as e:
         # Log the exception for debugging purposes if needed
         print(e)

@@ -4,20 +4,15 @@
     <a href="/">Home</a>
     <a href="/about">About</a>
     <a href="/education">Education</a>
-    <a href="/projects">Projects</a>
-    <a href="/hobbies">Hobbies</a>
+    <a href="/pnh">Projects & Hobbies</a>
     <a href="/timeline">Timeline</a>
 </nav>
 {% endblock %}
 {% block body %}
-<div class="container" style="justify-content: center;">
-    <div class="row">
-        <h1>Error</h1>
-    </div>
-    <div class="row">
-        <p>
-            {{ message }}
-        </p>
-    </div>
-</div>
+<section class="error-page" id="error-page">
+    <h2 class="heading"><span>Error</span></h2>
+    <p>
+        {{ message }}
+    </p>
+</section>
 {% endblock %}

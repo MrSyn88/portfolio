@@ -4,12 +4,44 @@
     <a href="/">Home</a>
     <a href="/about">About</a>
     <a href="/education">Education</a>
-    <a href="/projects">Projects</a>
-    <a href="/hobbies" class="active">Hobbies</a>
+    <a href="/pnh" class="active">Projects & Hobbies</a>
     <a href="/timeline">Timeline</a>
 </nav>
 {% endblock %}
 {% block body %}
+<section class="projects" id="projects">
+    <h2 class="heading">Latest <span>Projects</span></h2>
+
+    <div class="projects-container">
+        <div class="projects-box">
+            <img src="https://i.ibb.co/fQBcGc7/Rowd-E-Books.png" alt="Rowd-E-Books">
+            <div class="projects-layer">
+                <h4>RowdE-Books</h4>
+                <p>An online store for books made for Software Engineering at UTSA.</p>
+                <a href="https://github.com/MrSyn88/RowdE-Books"><i class='bx bx-link-external'></i></a>
+            </div>
+        </div>
+        <div class="projects-box">
+            <img src="https://i.ibb.co/JFr382c/Cryptid-Coin.png" alt="Cryptid-Coin">
+            <div class="projects-layer">
+                <h4>CryptidCoin</h4>
+                <p>Venture into the unknown and collect all your favorite cryptids.</p>
+                <a href="https://devpost.com/software/cryptidcoin"><i class='bx bx-link-external'></i></a>
+            </div>
+        </div>
+        <div class="projects-box">
+            <img src="https://i.ibb.co/GMzrpqF/Social-Circle.jpg" alt="Social-Circle">
+            <div class="projects-layer">
+                <h4>Social Circle</h4>
+                <p>A simple social media app that allows users to log in and submit text messages to a board for others
+                    to see</p>
+                <a href="https://devpost.com/software/social-circle"><i class='bx bx-link-external'></i></a>
+            </div>
+        </div>
+    </div>
+    <i class='bx bxs-down-arrow-circle' id="down-arrow"></i>
+</section>
+
 <section class="hobbies" id="hobbies">
     <h2 class="heading">My <span>Hobbies</span></h2>
 
