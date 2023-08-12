@@ -17,63 +17,59 @@ class AppTestCase(unittest.TestCase):
         assert response.status_code == 200
         html = response.get_data(as_text=True)
         assert "<title>Home</title>" in html
-        assert '<img width="125%" height="125%" src="https://i.ibb.co/bPv8jxc/me1.jpg" alt="Home Page Portrait">' in html
-        assert 'TL;DR' in html
-        assert '''Lorem ipsum dolor sit amet consectetur, adipisicing elit. Dolores illum omnis, perspiciatis nisi
-                accusantium libero ut! Vitae voluptates deleniti, dignissimos repellendus, alias pariatur eos dolorum
-                vero expedita illum eum quod?''' in html
-                
+        assert '<img src="https://i.ibb.co/9wxwvLF/profile-square.jpg" alt="Home Page Portrait">' in html
+        assert 'Production Engineer' in html
+        assert '''I am an entry-level Systems Analyst or Production Engineer with a strong foundation in computer science and
+            cloud computing. I graduated with a BS in Computer Science from UTSA, and I am able to work independently
+            and aspart of a team. I am passionate about learning new technologies and solving complex problems.''' in html
+        assert 'download="Nicolas Ruiz.pdf"' in html
+
     def test_about(self):
         "Open about and check it's content"
         response = self.client.get("/about")
         assert response.status_code == 200
         html = response.get_data(as_text=True)
         assert "<title>About</title>" in html
-        assert "About Me" in html
-        assert '''Lorem ipsum dolor sit amet consectetur, adipisicing elit. Dolores illum omnis, perspiciatis nisi
-                accusantium
-                libero ut! Vitae voluptates deleniti, dignissimos repellendus, alias pariatur eos dolorum vero expedita
-                illum eum quod?''' in html    
-        assert '<img width="125%" height="125%" src="https://i.ibb.co/wdgbZr6/bros.jpg" alt="Photo with brothers">' in html
-        assert 'Where I\'ve been' in html
-        assert "<script src=\"https://cdn.maptiler.com/maplibre-gl-js/v2.4.0/maplibre-gl.js\"></script>" in html  
-        assert "js/map_script.js" in html 
-        
+        assert "About <span>Me</span>" in html
+        assert '''Lorem ipsum dolor sit amet consectetur adipisicing elit. Provident explicabo cumque dignissimos odit? Rem
+            vitae
+            inventore saepe doloremque? Dicta laboriosam quod in impedit deserunt voluptate. Excepturi temporibus
+            cupiditate
+            accusamus iusto quae nihil laboriosam quasi, nobis debitis voluptatem hic? Nulla eligendi et, nam earum
+            excepturi tempora? Enim.''' in html
+        assert '<img src="https://i.ibb.co/ccT9tVM/bros.jpg" alt="Photo with brothers">' in html
+        assert "Where I've <span>Been</span>" in html
+        assert "<script src=\"https://cdn.maptiler.com/maplibre-gl-js/v2.4.0/maplibre-gl.js\"></script>" in html
+        assert "js/map_script.js" in html
+        assert "updateArrowRotation();" in html
+
     def test_education(self):
         "Open education and check it's content"
         response = self.client.get("/education")
         assert response.status_code == 200
         html = response.get_data(as_text=True)
         assert "<title>Education</title>" in html
-        assert '<img src="https://i.ibb.co/z616WGw/school2.jpg" alt="school2" border="0" alt="UTSA">' in html
-        assert "The University of Texas at San Antonio" in html 
-        assert '<img src="https://i.ibb.co/7Qt4DbQ/school1.jpg" alt="school1" border="0" alt="Smithson Valley High School">' in html
-        assert "Smithson Valley High school" in html 
-        
-    def test_projects(self):
-        "Open projects and check it's content"
-        response = self.client.get("/projects")
+        assert "<div class=\"year\"><i class='bx bxs-calendar'></i> 2018 - 2023</div>" in html
+        assert "Production Engineering Fellow - MLH Fellowship" in html
+        assert "<div class=\"year\"><i class='bx bxs-calendar'></i> May 2021 - May 2022</div>" in html
+        assert "Smithson Valley High School" in html
+        assert '<div class="education-box">' in html
+
+    def test_pnh(self):
+        "Open projects & hobbies and check it's content"
+        response = self.client.get("/pnh")
         assert response.status_code == 200
         html = response.get_data(as_text=True)
-        assert "<title>Projects</title>" in html
-        assert "My Past Work Experience" in html
-        assert '''Lorem ipsum dolor sit amet consectetur, adipisicing elit. Dolores illum omnis, perspiciatis nisi
-                accusantium
-                libero ut! Vitae voluptates deleniti, dignissimos repellendus, alias pariatur eos dolorum vero expedita
-                illum eum quod?''' in html   
-        assert 'Project 1' in html
-        assert 'Project 2' in html   
-        
-    def test_hobbies(self):
-        "Open hobbies and check it's content"
-        response = self.client.get("/hobbies")
-        assert response.status_code == 200
-        html = response.get_data(as_text=True)
-        assert "<title>Hobbies</title>" in html
+        assert "Latest <span>Projects</span>" in html
+        assert "Venture into the unknown and collect all your favorite cryptids." in html
+        assert 'RowdE-Books' in html
+        assert 'CryptidCoin' in html
+        assert 'Social Circle' in html in html
+        assert 'My <span>Hobbies</span>' in html
         assert 'Learning Instruments' in html
         assert 'Attending Hackathons' in html
         assert 'Mechanical Keyboards' in html
-        
+
     def test_timeline_route(self):
         "Open timeline, check it's content, post, and check again"
         # test GET
@@ -82,8 +78,9 @@ class AppTestCase(unittest.TestCase):
         html = response.get_data(as_text=True)
         assert "<title>Timeline</title>" in html
         assert '<form id="timelineForm" method="POST" action="/timeline">' in html
-        assert '<button type="submit" class="btn btn-primary mb-3">Post</button>' in html
+        assert '<input type="submit" value="Post" class="btn">' in html
         assert "document.getElementById('timelineForm').addEventListener('submit', function (event)" in html
+        assert "updateArrowRotation();"
 
         # test POST for two users and use GET to test the results
         response = self.client.post("/timeline",
@@ -93,12 +90,8 @@ class AppTestCase(unittest.TestCase):
         response = self.client.get("/timeline")
         assert response.status_code == 200
         html = response.get_data(as_text=True)
-        assert "<title>Timeline</title>" in html
-        assert '<form id="timelineForm" method="POST" action="/timeline">' in html
-        assert '<button type="submit" class="btn btn-primary mb-3">Post</button>' in html
         assert "John" in html
         assert "Hello world, I'm John!"
-        assert "document.getElementById('timelineForm').addEventListener('submit', function (event)" in html
 
         response = self.client.post("/timeline",
                                     data={"name": "Jane", "email": "jane@example.com",
@@ -107,14 +100,10 @@ class AppTestCase(unittest.TestCase):
         response = self.client.get("/timeline")
         assert response.status_code == 200
         html = response.get_data(as_text=True)
-        assert "<title>Timeline</title>" in html
-        assert '<form id="timelineForm" method="POST" action="/timeline">' in html
-        assert '<button type="submit" class="btn btn-primary mb-3">Post</button>' in html
         assert "Jane" in html
         assert "Hello world, I'm Jane!"
         assert "John" in html
         assert "Hello world, I'm John!"
-        assert "document.getElementById('timelineForm').addEventListener('submit', function (event)" in html                
 
     def test_malformed_timeline_post(self):
         "Test timeline POST requests with malformed data"
@@ -237,11 +226,12 @@ class AppTestCase(unittest.TestCase):
         response = self.client.get("/non_existent_route")
         assert response.status_code == 404
         assert "Not Found" in response.get_data(as_text=True)
-        
+
+
 class AppApiTestCase(unittest.TestCase):
     def setUp(self):
         self.client = app.test_client()
-        
+
     def test_timeline_api(self):
         "Test all the timeline api endpoints"
         # test GET
