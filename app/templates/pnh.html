@@ -39,7 +39,6 @@
             </div>
         </div>
     </div>
-    <i class='bx bx-down-arrow-alt' id="down-arrow"></i>
 </section>
 
 <section class="hobbies" id="hobbies">
@@ -94,6 +93,51 @@
             </div>
         </div>
     </div>
-    <i class='bx bx-up-arrow-alt' id="up-arrow"></i>
 </section>
+
+<div class="arrow">
+    <i id="arrow" class="bx bx-down-arrow-alt"></i>
+</div>
+
+<script>
+    document.addEventListener('DOMContentLoaded', function () {
+        var projectsSection = document.getElementById('projects');
+        var hobbiesSection = document.getElementById('hobbies');
+        var arrowDiv = document.querySelector('.arrow');
+
+        function updateArrowRotation() {
+            var projectsRect = projectsSection.getBoundingClientRect();
+            var hobbiesRect = hobbiesSection.getBoundingClientRect();
+            var scrollTop = window.scrollY || window.pageYOffset;
+
+            if (scrollTop >= projectsRect.top && scrollTop < hobbiesRect.top) {
+                arrowDiv.style.transform = 'rotate(0deg)';
+            } else {
+                arrowDiv.style.transform = 'rotate(180deg)';
+            }
+        }
+
+        updateArrowRotation(); // Call initially to set arrow on page load
+
+        document.addEventListener('scroll', function () {
+            updateArrowRotation();
+        });
+
+        arrowDiv.addEventListener('click', function () {
+            if (arrowDiv.style.transform === 'rotate(180deg)') {
+                // Scroll to the top of the page
+                window.scrollTo({
+                    top: 0,
+                    behavior: 'smooth'
+                });
+            } else {
+                // Scroll to the bottom of the page
+                window.scrollTo({
+                    top: document.body.scrollHeight,
+                    behavior: 'smooth'
+                });
+            }
+        });
+    });
+</script>
 {% endblock %}

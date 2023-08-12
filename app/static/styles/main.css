@@ -333,7 +333,6 @@ span {
     display: flex;
     flex-direction: column;
     position: relative;
-    justify-content: center;
     align-items: center;
     background: var(--second-bg-color);
 }
@@ -346,7 +345,6 @@ span {
     display: grid;
     grid-template-columns: repeat(3, 1fr);
     align-items: center;
-    justify-items: center;
     width: 100%;
     gap: 2.5rem;
 }
@@ -668,4 +666,38 @@ span {
 
 .posts img {
     border-radius: 50%;
+}
+
+.footer {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-wrap: wrap;
+    padding: 1rem 9%;
+    background: #13161b;
+}
+
+.footer-text p {
+    font-size: 1.2rem;
+}
+
+/* BREAKPOINTS */
+@media (max-width: 1200px) {
+    html {
+        font-size: 55%;
+    }
+}
+
+@media (max-width: 991px) {
+    .header {
+        padding: 2rem 3%;
+    }
+
+    section {
+        padding: 10rem 3% 2rem;
+    }
+
+    .footer {
+        padding: 1rem 3%;
+    }
 }

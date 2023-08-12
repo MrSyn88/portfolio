@@ -11,7 +11,7 @@
 {% block body %}
 
 <section class="posts" id="posts">
-    <h2 class="heading">Timeline <span>messages</span></h2>
+    <h2 class="heading">Timeline <span>Messages</span></h2>
 
     <div class="posts-row">
         <div class="posts-column">
@@ -30,13 +30,10 @@
             {% endfor %}
         </div>
     </div>
-    <div class="arrow">
-        <i id="arrow" class="bx bx-down-arrow-alt"></i>
-    </div>
 </section>
 
 <section class="timeline" id="timeline">
-    <h2 class="heading">Post a <span>message</span></h2>
+    <h2 class="heading">Post a <span>Message</span></h2>
 
     <form id="timelineForm" method="POST" action="/timeline">
         <div class="input-box">
@@ -48,7 +45,9 @@
     </form>
 </section>
 
-Lorem ipsum dolor sit amet, consectetur adipisicing elit. Iure in quaerat vel velit doloremque esse dolore, ipsum consequuntur ducimus sint accusamus deserunt voluptatem voluptas labore beatae rerum dolores. Placeat fuga quibusdam, nisi asperiores exercitationem dolores ex esse? Atque, deserunt expedita voluptatum itaque, eaque, debitis nostrum amet incidunt quia perferendis tempora.
+<div class="arrow">
+    <i id="arrow" class="bx bx-down-arrow-alt"></i>
+</div>
 
 <script>
     document.getElementById('timelineForm').addEventListener('submit', function (event) {

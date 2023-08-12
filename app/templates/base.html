@@ -30,9 +30,17 @@
         {% block nav %}
         {% endblock %}
     </header>
+
     {% block body %}
     {% endblock %}
-    </body>
+
+    <footer class="footer">
+        <div class="footer-text">
+            <p>Copyright &copy; 2023 by Nicolas Ruiz | All Rights Reserved.</p>
+        </div>
+    </footer>
+
+    <script src="{{ url_for('static', filename='js/script.js') }}"></script>
 </body>
 
 </html>
