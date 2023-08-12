@@ -13,7 +13,7 @@
     <div class="home-content">
         <h3>Hi, I'm</h3>
         <h1>Nicolas Ruiz</h1>
-        <h3>And I'm a <span>Production Engineer</span></h3>
+        <h3>And I'm a <span class="multiple-text"></span></h3>
         <p>I am an entry-level Systems Analyst or Production Engineer with a strong foundation in computer science and
             cloud computing. I graduated with a BS in Computer Science from UTSA, and I am able to work independently
             and aspart of a team. I am passionate about learning new technologies and solving complex problems.</p>
@@ -23,7 +23,7 @@
             <a href="https://www.instagram.com/NicRuiz88/"><i class='bx bxl-instagram-alt'></i></a>
             <a href="https://twitter.com/NicRuiz88"><i class='bx bxl-twitter'></i></a>
         </div>
-        <div href="" class="btn">Download Resume</div>
+        <a href="{{ url_for('static', filename='pdf/Nicolas Ruiz.pdf') }}" download="Nicolas Ruiz.pdf" class="btn">Download Resume</a>
     </div>
 
     <div class="home-img">

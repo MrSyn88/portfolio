@@ -22,7 +22,7 @@ class AppTestCase(unittest.TestCase):
         assert '''I am an entry-level Systems Analyst or Production Engineer with a strong foundation in computer science and
             cloud computing. I graduated with a BS in Computer Science from UTSA, and I am able to work independently
             and aspart of a team. I am passionate about learning new technologies and solving complex problems.''' in html
-        assert '<div href="" class="btn">Download Resume</div>' in html
+        assert 'download="Nicolas Ruiz.pdf"' in html
 
     def test_about(self):
         "Open about and check it's content"
@@ -38,9 +38,10 @@ class AppTestCase(unittest.TestCase):
             accusamus iusto quae nihil laboriosam quasi, nobis debitis voluptatem hic? Nulla eligendi et, nam earum
             excepturi tempora? Enim.''' in html
         assert '<img src="https://i.ibb.co/ccT9tVM/bros.jpg" alt="Photo with brothers">' in html
-        assert "Where I've <span>been</span>" in html
+        assert "Where I've <span>Been</span>" in html
         assert "<script src=\"https://cdn.maptiler.com/maplibre-gl-js/v2.4.0/maplibre-gl.js\"></script>" in html
         assert "js/map_script.js" in html
+        assert "updateArrowRotation();" in html
 
     def test_education(self):
         "Open education and check it's content"
@@ -52,9 +53,10 @@ class AppTestCase(unittest.TestCase):
         assert "Production Engineering Fellow - MLH Fellowship" in html
         assert "<div class=\"year\"><i class='bx bxs-calendar'></i> May 2021 - May 2022</div>" in html
         assert "Smithson Valley High School" in html
+        assert '<div class="education-box">' in html
 
-    def test_projects(self):
-        "Open projects and check it's content"
+    def test_pnh(self):
+        "Open projects & hobbies and check it's content"
         response = self.client.get("/pnh")
         assert response.status_code == 200
         html = response.get_data(as_text=True)
@@ -76,8 +78,9 @@ class AppTestCase(unittest.TestCase):
         html = response.get_data(as_text=True)
         assert "<title>Timeline</title>" in html
         assert '<form id="timelineForm" method="POST" action="/timeline">' in html
-        assert '<button type="submit" class="btn btn-primary mb-3">Post</button>' in html
+        assert '<input type="submit" value="Post" class="btn">' in html
         assert "document.getElementById('timelineForm').addEventListener('submit', function (event)" in html
+        assert "updateArrowRotation();"
 
         # test POST for two users and use GET to test the results
         response = self.client.post("/timeline",
@@ -87,12 +90,8 @@ class AppTestCase(unittest.TestCase):
         response = self.client.get("/timeline")
         assert response.status_code == 200
         html = response.get_data(as_text=True)
-        assert "<title>Timeline</title>" in html
-        assert '<form id="timelineForm" method="POST" action="/timeline">' in html
-        assert '<button type="submit" class="btn btn-primary mb-3">Post</button>' in html
         assert "John" in html
         assert "Hello world, I'm John!"
-        assert "document.getElementById('timelineForm').addEventListener('submit', function (event)" in html
 
         response = self.client.post("/timeline",
                                     data={"name": "Jane", "email": "jane@example.com",
@@ -101,14 +100,10 @@ class AppTestCase(unittest.TestCase):
         response = self.client.get("/timeline")
         assert response.status_code == 200
         html = response.get_data(as_text=True)
-        assert "<title>Timeline</title>" in html
-        assert '<form id="timelineForm" method="POST" action="/timeline">' in html
-        assert '<button type="submit" class="btn btn-primary mb-3">Post</button>' in html
         assert "Jane" in html
         assert "Hello world, I'm Jane!"
         assert "John" in html
         assert "Hello world, I'm John!"
-        assert "document.getElementById('timelineForm').addEventListener('submit', function (event)" in html
 
     def test_malformed_timeline_post(self):
         "Test timeline POST requests with malformed data"

@@ -20,10 +20,14 @@
             <div class="posts-box">
                 <div class="posts-content">
                     <div class="content">
-                        <img src={{ getGrav(posts.email) }} class="gravatar" alt="Gravatar Image" />
-                        <h3>{{ posts.name }}</h3>
-                        <div class="year"><i class='bx bxs-calendar'></i> {{ posts.created_at }}</div>
-                        <p>{{ posts.content }}</p>
+                        <div class="info">
+                            <img src={{ getGrav(posts.email) }} class="gravatar" alt="Gravatar Image" />
+                            <h3>{{ posts.name }}</h3>
+                            <div class="year"><i class='bx bxs-calendar'></i> {{ posts.created_at }}</div>
+                        </div>
+                        <div class="message">
+                            <p>{{ posts.content }}</p>
+                        </div>
                     </div>
                 </div>
             </div>

@@ -106,6 +106,21 @@ span {
     margin-left: 5rem;
     border: .2rem solid var(--main-color);
     box-shadow: 0 0 1rem var(--main-color);
+    animation: floatImage 4s ease-in-out infinite;
+}
+
+@keyframes floatImage {
+    0% {
+        transform: translateY(0);
+    }
+
+    50% {
+        transform: translateY(-2.4rem);
+    }
+
+    100% {
+        transform: translateY(0);
+    }
 }
 
 .social-media a {
@@ -158,7 +173,6 @@ span {
 
 .about-img img {
     border-radius: 10px;
-    ;
     width: 25vw;
     margin-right: 5rem;
     border: .2rem solid var(--main-color);
@@ -191,6 +205,19 @@ span {
     justify-content: center;
     align-items: center;
     gap: 2rem;
+    padding-bottom: 5rem;
+}
+
+#map {
+    height: 500px;
+    width: 800px;
+    border-radius: 10px;
+}
+
+.maplibregl-popup {
+    max-width: 400px;
+    font: 14px/22px 'Poppins', sans-serif;
+    color: black;
 }
 
 .arrow {
@@ -216,7 +243,7 @@ span {
     @media (max-width: 768px) {
         min-width: 2.5rem;
     }
-    
+
 }
 
 .arrow i {
@@ -621,8 +648,8 @@ span {
 }
 
 .posts-content .content {
+    display: flex;
     position: relative;
-    padding: 1.5rem;
     border: .2rem solid var(--main-color);
     border-radius: .6rem;
     margin-bottom: 2rem;
@@ -645,27 +672,46 @@ span {
     width: 100%;
 }
 
-.posts-content .content .year {
-    font-size: 1.5rem;
+.posts-content .info {
+    flex: 1;
+    display: bloxk;
+    align-items: center;
+    padding: 1rem;
+    padding-left: 1.5rem;
+}
+
+.posts-content .content .info .year {
+    font-size: 1.2rem;
     color: var(--main-color);
-    padding-bottom: .5rem;
+    padding-top: .5rem;
+    padding-bottom: 1rem;
 }
 
-.posts-content .content .year i {
-    padding-right: .5rem;
+.posts-content .content .info .year i {
+    padding-right: .25rem;
 }
 
-.posts-content .content h3 {
+.posts-content .content .info h3 {
     font-size: 2rem;
 }
 
-.posts-content .content p {
-    font-size: 1.6rem;
-    padding-right: .5rem;
+.posts-content .content .message {
+    flex: 5;
+    display: flex;
+    padding: 1rem;
+    align-items: center;
+    text-align: left;
 }
 
-.posts img {
+.posts-content .content .message p {
+    font-size: 1.6rem;
+    margin: 0;
+}
+
+.posts .info img {
     border-radius: 50%;
+    margin-right: 1rem;
+    margin-bottom: 1rem;
 }
 
 .footer {
@@ -697,7 +743,153 @@ span {
         padding: 10rem 3% 2rem;
     }
 
+    .projects,
+    .hobbies,
+    .timeline,
+    .map-section {
+        padding-bottom: 7rem;
+    }
+
+    .timeline {
+        min-height: auto;
+    }
+
     .footer {
         padding: 1rem 3%;
+    }
+
+    #map {
+        height: 400px;
+        width: 500px;
+    }
+}
+
+@media (max-width: 768px) {
+    #menu-icon {
+        display: block;
+    }
+
+    .navbar {
+        position: absolute;
+        top: 100%;
+        left: 0;
+        width: 100%;
+        padding: 1rem 3%;
+        background: var(--bg-color);
+        border-top: .1rem solid rgba(0, 0, 0, .2);
+        box-shadow: 0 .5rem 1rem rgba(0, 0, 0, .2);
+        display: none;
+    }
+
+    .navbar.active {
+        display: block;
+    }
+
+    .navbar a {
+        display: block;
+        font-size: 2rem;
+        margin: 3rem;
+    }
+
+    .home {
+        flex-direction: column;
+    }
+
+    .home-content h3 {
+        font-size: 2.6rem;
+    }
+
+    .home-content h1 {
+        font-size: 5rem;
+    }
+
+    .home-img img {
+        width: 70vw;
+        margin-top: 4rem;
+        margin-left: 0;
+    }
+
+    .about {
+        flex-direction: column-reverse;
+    }
+
+    .about img {
+        width: 70vw;
+        margin-top: 4rem;
+        margin-right: 0;
+    }
+
+    .projects h2,
+    .hobbies h2 {
+        margin-bottom: 3rem;
+    }
+
+    .projects-container,
+    .hobbies-container {
+        grid-template-columns: repeat(2, 1fr);
+    }
+}
+
+@media (max-width: 617px) {
+
+    .projects-container,
+    .hobbies-container {
+        grid-template-columns: 1fr;
+    }
+
+    #map {
+        height: 400px;
+        width: 350px;
+    }
+}
+
+@media (max-width: 450px) {
+
+    html {
+        font-size: 50%;
+    }
+
+    .timeline form .input-box input {
+        width: 100%;
+    }
+
+    .posts-content .content {
+        flex-direction: column;
+        align-items: center;
+    }
+
+    .posts-content .info,
+    .posts-content .message {
+        padding: 1rem;
+        text-align: center;
+    }
+
+    .posts-content .info h3,
+    .posts-content .message p {
+        font-size: 1.4rem;
+    }
+
+    .posts-content .message p {
+        padding: 1rem;
+    }
+
+    .posts-content .info img {
+        margin-bottom: 0.5rem;
+        margin-top: 0.5rem;
+    }
+}
+
+@media (max-width: 365px) {
+    .home-img img {
+        width: 90vw;
+    }
+
+    .about-img img {
+        width: 90vw;
+    }
+
+    #map {
+        height: 350px;
+        width: 250px;
     }
 }
