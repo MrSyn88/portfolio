@@ -33,3 +33,7 @@ jobs:
           
       - name: Test with unittest
         run: ./run-test.sh
+
+      - name: Send Testing Failure Message
+        if: failure()
+        run: curl -s -X POST "${{ secrets.DISCORD_WEBHOOK }}" -d "content=🚨 PR Testing Failed"

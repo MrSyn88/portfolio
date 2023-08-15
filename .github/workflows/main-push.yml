@@ -37,7 +37,7 @@ jobs:
         
       - name: Send Testing Failure Message
         if: failure()
-        run: curl -s -X POST "${{ secrets.DISCORD_WEBHOOK }}" -d "content=🚨 Testing Failed"
+        run: curl -s -X POST "${{ secrets.DISCORD_WEBHOOK }}" -d "content=🚨 Main Testing Failed"
 
   deploy:
     needs: test
