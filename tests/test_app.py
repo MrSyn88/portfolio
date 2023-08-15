@@ -21,7 +21,7 @@ class AppTestCase(unittest.TestCase):
         assert 'Production Engineer' in html
         assert '''I am an entry-level Systems Analyst or Production Engineer with a strong foundation in computer science and
             cloud computing. I graduated with a BS in Computer Science from UTSA, and I am able to work independently
-            and aspart of a team. I am passionate about learning new technologies and solving complex problems.''' in html
+            and as part of a team. I am passionate about learning new technologies and solving complex problems.''' in html
         assert 'download="Nicolas Ruiz.pdf"' in html
 
     def test_about(self):
@@ -69,6 +69,19 @@ class AppTestCase(unittest.TestCase):
         assert 'Learning Instruments' in html
         assert 'Attending Hackathons' in html
         assert 'Mechanical Keyboards' in html
+        
+    def test_contact_me(self):
+        "Open contact me and check it's content"
+        response = self.client.get("/contact-me")
+        assert response.status_code == 200
+        html = response.get_data(as_text=True)
+        assert "<title>Contact Me</title>" in html
+        assert "Contact <span>Me!</span>" in html
+        assert '<input type="submit" value="Send Message" class="btn">' in html
+        assert '<input type="number" class="form-control" id="numberInput" name="number" placeholder="Mobile Number">' in html
+        assert '<form id="contactForm" action="https://formsubmit.co/syngenruiz2@gmail.com" method="POST">' in html in html
+        assert '<div class="input-box">' in html
+        assert '<section class="contact" id="contact">' in html
 
     def test_timeline_route(self):
         "Open timeline, check it's content, post, and check again"

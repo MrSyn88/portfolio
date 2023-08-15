@@ -125,10 +125,21 @@ def education():
 
 
 @app.route('/pnh')
-def projects():
+def pnh():
     try:
         # attempt to render the page
         return render_template('pnh.html', title="Projects & Hobbies", url=os.getenv("URL"))
+    except Exception as e:
+        # Log the exception for debugging purposes if needed
+        print(e)
+        # Render the error template
+        return render_template('error.html', title="Error", message="An error occurred.")
+    
+@app.route('/contact-me')
+def contact():
+    try:
+        # attempt to render the page
+        return render_template('contact-me.html', title="Contact Me", url=os.getenv("URL"))
     except Exception as e:
         # Log the exception for debugging purposes if needed
         print(e)

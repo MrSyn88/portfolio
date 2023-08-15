@@ -15,7 +15,7 @@ ScrollReveal({
 });
 
 ScrollReveal().reveal('.home-content, .heading', { origin: 'top' });
-ScrollReveal().reveal('.home-img, .education-box, .projects-box, .hobbies-box, .timeline form, .posts-box, #map', { origin: 'bottom' });
+ScrollReveal().reveal('.home-img, .education-box, .projects-box, .hobbies-box, .timeline form, .contact form, .posts-box, #map', { origin: 'bottom' });
 ScrollReveal().reveal('.home-content h1, .about-img', { origin: 'left' });
 ScrollReveal().reveal('.home-content p, .about-content', { origin: 'right' });
 
