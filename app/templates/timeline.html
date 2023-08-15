@@ -42,10 +42,10 @@
 
     <form id="timelineForm" method="POST" action="/timeline">
         <div class="input-box">
-            <input type="text" class="form-control" id="nameInput" name="name" placeholder="Name">
-            <input type="email" class="form-control" id="emailInput" name="email" placeholder="Email Address">
+            <input type="text" class="form-control" id="nameInput" name="name" placeholder="Name" required>
+            <input type="email" class="form-control" id="emailInput" name="email" placeholder="Email Address" required>
         </div>
-        <textarea class="form-control" id="contentInput" name="content" rows="10" placeholder="Your Message"></textarea>
+        <textarea class="form-control" id="contentInput" name="content" rows="10" placeholder="Your Message" required></textarea>
         <input type="submit" value="Post" class="btn">
     </form>
 </section>

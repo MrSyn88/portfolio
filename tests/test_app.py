@@ -77,9 +77,9 @@ class AppTestCase(unittest.TestCase):
         html = response.get_data(as_text=True)
         assert "<title>Contact Me</title>" in html
         assert "Contact <span>Me!</span>" in html
-        assert '<input type="submit" value="Send Message" class="btn">' in html
+        assert '<input type="submit" value="Send Message" class="btn" onclick="return validateAndSubmit(event)">' in html
         assert '<input type="number" class="form-control" id="numberInput" name="number" placeholder="Mobile Number">' in html
-        assert '<form id="contactForm" action="https://formsubmit.co/98e2200d283df1ce0a7053742feb6773" method="POST">' in html in html
+        assert '<form id="contactForm" method="POST">' in html in html
         assert '<div class="input-box">' in html
         assert '<section class="contact" id="contact">' in html
 

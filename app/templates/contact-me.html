@@ -13,17 +13,25 @@
 <section class="contact" id="contact">
     <h2 class="heading">Contact <span>Me!</span></h2>
 
-    <form id="contactForm" action="https://formsubmit.co/98e2200d283df1ce0a7053742feb6773" method="POST">
+    <form id="contactForm" method="POST">
+        <!-- honeypot -->
+        <input type="text" name="_honey" style="display: none;">
+
+        <!-- disable captcha -->
+        <input type="hidden" name="_captcha" value="false">
+
         <div class="input-box">
-            <input type="text" class="form-control" id="nameInput" name="name" placeholder="Name">
-            <input type="email" class="form-control" id="emailInput" name="email" placeholder="Email Address">
+            <input type="text" class="form-control" id="nameInput" name="name" placeholder="Name" required>
+            <input type="email" class="form-control" id="emailInput" name="email" placeholder="Email Address" required>
         </div>
         <div class="input-box">
             <input type="number" class="form-control" id="numberInput" name="number" placeholder="Mobile Number">
-            <input type="text" class="form-control" id="subjectInput" name="subject" placeholder="Email Subject">
+            <input type="text" class="form-control" id="subjectInput" name="subject" placeholder="Email Subject"
+                required>
         </div>
-        <textarea class="form-control" id="contentInput" name="content" rows="10" placeholder="Your Message"></textarea>
-        <input type="submit" value="Send Message" class="btn">
+        <textarea class="form-control" id="contentInput" name="message" rows="10" placeholder="Your Message"
+            required></textarea>
+        <input type="submit" value="Send Message" class="btn" onclick="return validateAndSubmit(event)">
     </form>
 </section>
 {% endblock %}
