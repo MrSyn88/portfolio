@@ -79,7 +79,7 @@ class AppTestCase(unittest.TestCase):
         assert "Contact <span>Me!</span>" in html
         assert '<input type="submit" value="Send Message" class="btn">' in html
         assert '<input type="number" class="form-control" id="numberInput" name="number" placeholder="Mobile Number">' in html
-        assert '<form id="contactForm" action="#">' in html in html
+        assert '<form id="contactForm" action="https://formsubmit.co/syngenruiz2@gmail.com" method="POST">' in html in html
         assert '<div class="input-box">' in html
         assert '<section class="contact" id="contact">' in html
 
