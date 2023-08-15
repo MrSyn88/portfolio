@@ -550,7 +550,8 @@ span {
     text-shadow: 0 0 1rem black;
 }
 
-.timeline {
+.timeline,
+.contact {
     display: flex;
     position: relative;
     flex-direction: column;
@@ -558,25 +559,30 @@ span {
     background: var(--second-bg-color);
 }
 
-.timline h2 {
+.timline h2,
+.contact h2 {
     margin-bottom: 3rem;
 }
 
-.timeline form {
+.timeline form,
+.contact form {
     max-width: 70rem;
     margin: 1rem auto;
     text-align: center;
     margin-bottom: 3rem;
 }
 
-.timeline form .input-box {
+.timeline form .input-box,
+.contact form .input-box {
     display: flex;
     justify-content: space-between;
     flex-wrap: wrap;
 }
 
 .timeline form .input-box input,
-.timeline form textarea {
+.timeline form textarea,
+.contact form .input-box input,
+.contact form textarea {
     width: 100%;
     padding: 1.5rem;
     font-size: 1.6rem;
@@ -586,15 +592,18 @@ span {
     margin: .7rem 0;
 }
 
-.timeline form .input-box input {
+.timeline form .input-box input,
+.contact form .input-box input {
     width: 49%;
 }
 
-.timeline form textarea {
+.timeline form textarea,
+.contact form textarea {
     resize: none;
 }
 
-.timeline form .btn {
+.timeline form .btn,
+.contact form .btn {
     margin-top: 2rem;
 }
 
@@ -748,7 +757,8 @@ span {
         padding-bottom: 7rem;
     }
 
-    .timeline {
+    .timeline,
+    .contact {
         min-height: auto;
     }
 
@@ -847,7 +857,8 @@ span {
         font-size: 50%;
     }
 
-    .timeline form .input-box input {
+    .timeline form .input-box input,
+    .contact form .input-box input {
         width: 100%;
     }
 
