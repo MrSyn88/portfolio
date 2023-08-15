@@ -272,7 +272,6 @@ span {
     justify-content: center;
     align-items: center;
     flex-direction: column;
-    min-height: auto;
     padding-bottom: 5rem;
 }
 
@@ -517,7 +516,6 @@ span {
     justify-content: center;
     align-items: center;
     flex-direction: column;
-    min-height: auto;
     padding-bottom: 5rem;
 }
 
@@ -538,7 +536,6 @@ span {
     justify-content: center;
     align-items: center;
     flex-direction: column;
-    min-height: auto;
     padding-bottom: 5rem;
 }
 
@@ -721,6 +718,7 @@ span {
     flex-wrap: wrap;
     padding: 1rem 9%;
     background: #13161b;
+    margin-top: auto;
 }
 
 .footer-text p {
