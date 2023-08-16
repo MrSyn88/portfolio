@@ -556,7 +556,9 @@ span {
     position: relative;
     flex-direction: column;
     align-items: center;
+    justify-content: center;
     background: var(--second-bg-color);
+    padding-bottom: 5rem;
 }
 
 .timline h2,
