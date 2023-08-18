@@ -1,5 +1,6 @@
 import os
 from flask import Flask, render_template, request, redirect, url_for, jsonify
+from flask_basicauth import BasicAuth
 from dotenv import load_dotenv
 from peewee import MySQLDatabase, Model, CharField, TextField, DateTimeField, DoesNotExist, IntegrityError, \
     SqliteDatabase
@@ -16,9 +17,15 @@ load_dotenv()
 app = Flask(__name__, static_url_path='/static')
 
 if os.getenv("TESTING") == "true":
+    app.config['BASIC_AUTH_USERNAME'] = 'testing'
+    app.config['BASIC_AUTH_PASSWORD'] = 'testing'
+    basic_auth = BasicAuth(app)
     print("Running in test mode")
     mydb = SqliteDatabase('file:memory?mode=memory&cache=shared', uri=True)
 else:
+    app.config['BASIC_AUTH_USERNAME'] = os.environ.get('BASIC_AUTH_USERNAME')
+    app.config['BASIC_AUTH_PASSWORD'] = os.environ.get('BASIC_AUTH_PASSWORD')
+    basic_auth = BasicAuth(app)
     mydb = MySQLDatabase(os.getenv("MYSQL_DATABASE"),
                          user=os.getenv("MYSQL_USER"),
                          password=os.getenv("MYSQL_PASSWORD"),
@@ -184,6 +191,7 @@ def post_timeline_post():
 
 
 @app.route('/api/timeline_post', methods=['POST'])
+@basic_auth.required
 def post_time_line_post():
     try:
         # try to send the POST request
@@ -225,6 +233,7 @@ def get_time_line_post():
 
 
 @app.route('/api/timeline_post/<int:post_id>', methods=['DELETE'])
+@basic_auth.required
 def delete_timeline_post(post_id):
     try:
         # try to delete the post with the post_id
