@@ -3,6 +3,7 @@
 import unittest
 import os
 from app import app
+import base64
 
 os.environ['TESTING'] = 'true'
 
@@ -244,6 +245,13 @@ class AppTestCase(unittest.TestCase):
 class AppApiTestCase(unittest.TestCase):
     def setUp(self):
         self.client = app.test_client()
+        
+    def get_basic_auth_headers(self):
+        username = "testing"
+        password = "testing"
+        auth_string = f"{username}:{password}"
+        auth_base64 = base64.b64encode(auth_string.encode('utf-8')).decode('utf-8')
+        return {'Authorization': f'Basic {auth_base64}'}
 
     def test_timeline_api(self):
         "Test all the timeline api endpoints"
@@ -258,7 +266,8 @@ class AppApiTestCase(unittest.TestCase):
         # test POST for two users and use GET to test the results
         response = self.client.post("/api/timeline_post",
                                     data={"name": "John", "email": "john@example.com",
-                                          "content": "Hello world, I'm John!"})
+                                          "content": "Hello world, I'm John!"},
+                                    headers=self.get_basic_auth_headers())
         assert response.status_code == 201
         response = self.client.get("/api/timeline_post")
         assert response.status_code == 200
@@ -273,7 +282,8 @@ class AppApiTestCase(unittest.TestCase):
 
         response = self.client.post("/api/timeline_post",
                                     data={"name": "Jane", "email": "jane@example.com",
-                                          "content": "Hello world, I'm Jane!"})
+                                          "content": "Hello world, I'm Jane!"},
+                                    headers=self.get_basic_auth_headers())
         assert response.status_code == 201
         response = self.client.get("/api/timeline_post")
         assert response.status_code == 200
@@ -291,7 +301,8 @@ class AppApiTestCase(unittest.TestCase):
         assert json["timeline_posts"][1]["id"] == 1
 
         # test DELETE for both posts and use GET to test the results
-        response = self.client.delete(f"/api/timeline_post/2")
+        response = self.client.delete(f"/api/timeline_post/2",
+                                    headers=self.get_basic_auth_headers())
         assert response.status_code == 200
         assert response.is_json
         json = response.get_json()
@@ -309,7 +320,8 @@ class AppApiTestCase(unittest.TestCase):
         assert json["timeline_posts"][0]["content"] == "Hello world, I'm John!"
         assert json["timeline_posts"][0]["id"] == 1
 
-        response = self.client.delete(f"/api/timeline_post/1")
+        response = self.client.delete(f"/api/timeline_post/1",
+                                    headers=self.get_basic_auth_headers())
         assert response.status_code == 200
         assert response.is_json
         json = response.get_json()
@@ -327,7 +339,8 @@ class AppApiTestCase(unittest.TestCase):
         "Test timeline api POST requests with malformed data"
         # POST request missing name
         response = self.client.post("/api/timeline_post",
-                                    data={"email": "john@example.com", "content": "Hello world, I'm John!"})
+                                    data={"email": "john@example.com", "content": "Hello world, I'm John!"},
+                                    headers=self.get_basic_auth_headers())
         assert response.status_code == 400
         json = response.get_json()
         assert json is not None and "error" in json
@@ -335,7 +348,8 @@ class AppApiTestCase(unittest.TestCase):
 
         # POST request missing content
         response = self.client.post("/api/timeline_post",
-                                    data={"name": "John Doe", "email": "john@example.com", "content": ""})
+                                    data={"name": "John Doe", "email": "john@example.com", "content": ""},
+                                    headers=self.get_basic_auth_headers())
         assert response.status_code == 400
         json = response.get_json()
         assert json is not None and "error" in json
@@ -343,7 +357,8 @@ class AppApiTestCase(unittest.TestCase):
 
         # POST request missing email
         response = self.client.post("/api/timeline_post",
-                                    data={"name": "John Doe", "content": "Hello world, I'm John!"})
+                                    data={"name": "John Doe", "content": "Hello world, I'm John!"},
+                                    headers=self.get_basic_auth_headers())
         assert response.status_code == 400
         json = response.get_json()
         assert json is not None and "error" in json
@@ -352,7 +367,8 @@ class AppApiTestCase(unittest.TestCase):
         # POST request with malformed email
         response = self.client.post("/api/timeline_post",
                                     data={"name": "John Doe", "email": "not-an-email",
-                                          "content": "Hello world, I'm John!"})
+                                          "content": "Hello world, I'm John!"},
+                                    headers=self.get_basic_auth_headers())
         assert response.status_code == 400
         json = response.get_json()
         assert json is not None and "error" in json
@@ -360,7 +376,8 @@ class AppApiTestCase(unittest.TestCase):
 
         response = self.client.post("/api/timeline_post",
                                     data={"name": "John Doe", "email": "email",
-                                          "content": "Hello world, I'm John!"})
+                                          "content": "Hello world, I'm John!"},
+                                    headers=self.get_basic_auth_headers())
         assert response.status_code == 400
         json = response.get_json()
         assert json is not None and "error" in json
@@ -368,7 +385,8 @@ class AppApiTestCase(unittest.TestCase):
 
         response = self.client.post("/api/timeline_post",
                                     data={"name": "John Doe", "email": "email.com",
-                                          "content": "Hello world, I'm John!"})
+                                          "content": "Hello world, I'm John!"},
+                                    headers=self.get_basic_auth_headers())
         assert response.status_code == 400
         json = response.get_json()
         assert json is not None and "error" in json
@@ -376,7 +394,8 @@ class AppApiTestCase(unittest.TestCase):
 
         response = self.client.post("/api/timeline_post",
                                     data={"name": "John Doe", "email": "name@email",
-                                          "content": "Hello world, I'm John!"})
+                                          "content": "Hello world, I'm John!"},
+                                    headers=self.get_basic_auth_headers())
         assert response.status_code == 400
         json = response.get_json()
         assert json is not None and "error" in json
@@ -384,7 +403,8 @@ class AppApiTestCase(unittest.TestCase):
 
         response = self.client.post("/api/timeline_post",
                                     data={"name": "John Doe", "email": "name@email.c",
-                                          "content": "Hello world, I'm John!"})
+                                          "content": "Hello world, I'm John!"},
+                                    headers=self.get_basic_auth_headers())
         assert response.status_code == 400
         json = response.get_json()
         assert json is not None and "error" in json
@@ -393,7 +413,8 @@ class AppApiTestCase(unittest.TestCase):
         # POST request with malformed name
         response = self.client.post("/api/timeline_post",
                                     data={"name": "J0hn Doe", "email": "john@example.com",
-                                          "content": "Hello world, I'm John!"})
+                                          "content": "Hello world, I'm John!"},
+                                    headers=self.get_basic_auth_headers())
         assert response.status_code == 400
         json = response.get_json()
         assert json is not None and "error" in json
@@ -401,7 +422,8 @@ class AppApiTestCase(unittest.TestCase):
 
         response = self.client.post("/api/timeline_post",
                                     data={"name": "John Doe!", "email": "john@example.com",
-                                          "content": "Hello world, I'm John!"})
+                                          "content": "Hello world, I'm John!"},
+                                    headers=self.get_basic_auth_headers())
         assert response.status_code == 400
         json = response.get_json()
         assert json is not None and "error" in json
@@ -409,7 +431,8 @@ class AppApiTestCase(unittest.TestCase):
 
         response = self.client.post("/api/timeline_post",
                                     data={"name": "John Doe;", "email": "john@example.com",
-                                          "content": "Hello world, I'm John!"})
+                                          "content": "Hello world, I'm John!"},
+                                    headers=self.get_basic_auth_headers())
         assert response.status_code == 400
         json = response.get_json()
         assert json is not None and "error" in json
@@ -417,7 +440,8 @@ class AppApiTestCase(unittest.TestCase):
 
         response = self.client.post("/api/timeline_post",
                                     data={"name": "John Doe123", "email": "john@example.com",
-                                          "content": "Hello world, I'm John!"})
+                                          "content": "Hello world, I'm John!"},
+                                    headers=self.get_basic_auth_headers())
         assert response.status_code == 400
         json = response.get_json()
         assert json is not None and "error" in json
@@ -425,7 +449,8 @@ class AppApiTestCase(unittest.TestCase):
 
         response = self.client.post("/api/timeline_post",
                                     data={"name": "John Doe{}", "email": "john@example.com",
-                                          "content": "Hello world, I'm John!"})
+                                          "content": "Hello world, I'm John!"},
+                                    headers=self.get_basic_auth_headers())
         assert response.status_code == 400
         json = response.get_json()
         assert json is not None and "error" in json
@@ -433,7 +458,8 @@ class AppApiTestCase(unittest.TestCase):
 
         response = self.client.post("/api/timeline_post",
                                     data={"name": "John Doe@", "email": "john@example.com",
-                                          "content": "Hello world, I'm John!"})
+                                          "content": "Hello world, I'm John!"},
+                                    headers=self.get_basic_auth_headers())
         assert response.status_code == 400
         json = response.get_json()
         assert json is not None and "error" in json
