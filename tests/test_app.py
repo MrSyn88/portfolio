@@ -17,10 +17,10 @@ class AppTestCase(unittest.TestCase):
         response = self.client.get("/")
         assert response.status_code == 200
         html = response.get_data(as_text=True)
-        assert "<title>Home</title>" in html
+        assert "<title>NR | Home</title>" in html
         assert '<img src="https://i.ibb.co/9wxwvLF/profile-square.jpg" alt="Home Page Portrait">' in html
         assert 'Production Engineer' in html
-        assert '''I am an entry-level Systems Analyst or Production Engineer with a strong foundation in computer science and
+        assert '''I am an entry-level <span><b>Systems Analyst</b></span> or <span><b>Production Engineer</b></span> with a strong foundation in computer science and
             cloud computing. I graduated with a BS in Computer Science from UTSA, and I am able to work independently
             and as part of a team. I am passionate about learning new technologies and solving complex problems.''' in html
         assert 'download="Nicolas Ruiz.pdf"' in html
@@ -30,7 +30,7 @@ class AppTestCase(unittest.TestCase):
         response = self.client.get("/about")
         assert response.status_code == 200
         html = response.get_data(as_text=True)
-        assert "<title>About</title>" in html
+        assert "<title>NR | About</title>" in html
         assert "About <span>Me</span>" in html
         assert '''Lorem ipsum dolor sit amet consectetur adipisicing elit. Provident explicabo cumque dignissimos odit? Rem
             vitae
@@ -49,7 +49,7 @@ class AppTestCase(unittest.TestCase):
         response = self.client.get("/education")
         assert response.status_code == 200
         html = response.get_data(as_text=True)
-        assert "<title>Education</title>" in html
+        assert "<title>NR | Education</title>" in html
         assert "<div class=\"year\"><i class='bx bxs-calendar'></i> 2018 - 2023</div>" in html
         assert "Production Engineering Fellow - MLH Fellowship" in html
         assert "<div class=\"year\"><i class='bx bxs-calendar'></i> May 2021 - May 2022</div>" in html
@@ -76,7 +76,7 @@ class AppTestCase(unittest.TestCase):
         response = self.client.get("/contact-me")
         assert response.status_code == 200
         html = response.get_data(as_text=True)
-        assert "<title>Contact Me</title>" in html
+        assert "<title>NR | Contact Me</title>" in html
         assert "Contact <span>Me!</span>" in html
         assert '<input type="submit" value="Send Message" class="btn" onclick="return validateAndSubmit(event)">' in html
         assert '<input type="number" class="form-control" id="numberInput" name="number" placeholder="Mobile Number">' in html
@@ -90,7 +90,7 @@ class AppTestCase(unittest.TestCase):
         response = self.client.get("/timeline")
         assert response.status_code == 200
         html = response.get_data(as_text=True)
-        assert "<title>Timeline</title>" in html
+        assert "<title>NR | Timeline</title>" in html
         assert '<form id="timelineForm" method="POST" action="/timeline">' in html
         assert '<input type="submit" value="Post" class="btn">' in html
         assert "document.getElementById('timelineForm').addEventListener('submit', function (event)" in html
