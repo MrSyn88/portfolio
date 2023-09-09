@@ -1,48 +1,6 @@
-# Production Engineering - Week 1 - Portfolio Site
+# My Portfolio Webiste!!
 
-Welcome to the MLH Fellowship! During Week 1, you'll be using Flask to build a portfolio site. This site will be the foundation for activities we do in future weeks so spend time this week making it your own and reflect your personality!
-
-## Tasks
-
-Once you've got your portfolio downloaded and running using the instructions below, you should attempt to complete the following tasks.
-
-For each of these tasks, you should create an [Issue](https://docs.github.com/en/issues/tracking-your-work-with-issues/about-issues) and work on them in a new [branch](https://docs.github.com/en/pull-requests/collaborating-with-pull-requests/proposing-changes-to-your-work-with-pull-requests/about-branches). When the task has been completed, you should open a [Pull Request](https://docs.github.com/en/pull-requests/collaborating-with-pull-requests/proposing-changes-to-your-work-with-pull-requests/about-pull-requests) and get another fellow in your pod to give you feedback before merging it in.
-
-*Note: Make sure to include a link to the Issue you're progressing on inside of your Pull Request so your reviewer knows what you're progressing on!*
-
-### GitHub Tasks
-- [x] Create Issues for each task below
-- [x] Progress on each task in a new branch
-- [x] Open a Pull Request when a task is finished to get feedback
-
-### Portfolio Tasks
-- [x] Add a photo of yourself to the website
-- [x] Add an "About youself" section to the website.
-- [x] Add your previous work experiences
-- [x] Add your hobbies (including images)
-- [x] Add your current/previous education
-- [x] Add a map of all the cool locations/countries you visited
-
-### Flask Tasks
-- [x] Get your Flask app running locally on your machine using the instructions below.
-- [x] Add a template for adding multiple work experiences/education/hobbies using [Jinja](https://jinja.palletsprojects.com/en/3.0.x/api/#basics)
-- [x] Create a new page to display hobbies.
-- [x] Add a menu bar that dynamically displays other pages in the app
-
-
-## Getting Started
-
-You need to do all your progress here.
-
-- Added html files for different pages
-- Added routing to go navigate between pages with jinja
-- Added a navbar to quickly navigate between pages
-- Added photo and about myself
-- Added education
-- Added Hobbies
-- Added work experience
-- Added map
-- Cleaned up UI
+This is my portfolio website made using Flask, Docker, and Nginx
 
 ## Installation
 
@@ -62,11 +20,87 @@ pip install -r requirements.txt
 
 ## Usage
 
-Create and fill in a .env file using the example.env template (make a copy using the variables inside of the template)
+***Create and fill in a .env file using the example.env template (make a copy using the variables inside of the template***
+***The Basic Auth Username and Password will be used when accessing the POST and DELETE API endpoints***
+
+### Running with Docker Locally
+
+Run docker-compose. If you're using Docker Desktop and WSL2 like me, you might need to use sudo.
+```bash
+❯ sudo docker compose up -d --build
+```
+
+You should get a response like this in the terminal:
+```
+❯ sudo docker compose up -d --build
+[sudo] password for mrsyn:
+[+] Building 2.9s (10/10) FINISHED                                                                       docker:default
+ => [myportfolio internal] load build definition from Dockerfile                                                   0.0s
+ => => transferring dockerfile: 216B                                                                               0.0s
+ => [myportfolio internal] load .dockerignore                                                                      0.0s
+ => => transferring context: 2B                                                                                    0.0s
+ => [myportfolio internal] load metadata for docker.io/library/python:3.9-slim-buster                              0.8s
+ => [myportfolio 1/5] FROM docker.io/library/python:3.9-slim-buster@sha256:320a7a4250aba4249f458872adecf92eea88dc  0.0s
+ => [myportfolio internal] load build context                                                                      0.3s
+ => => transferring context: 9.27MB                                                                                0.3s
+ => CACHED [myportfolio 2/5] WORKDIR /myportfolio                                                                  0.0s
+ => CACHED [myportfolio 3/5] COPY requirements.txt .                                                               0.0s
+ => CACHED [myportfolio 4/5] RUN pip3 install -r requirements.txt                                                  0.0s
+ => [myportfolio 5/5] COPY . .                                                                                     1.3s
+ => [myportfolio] exporting to image                                                                               0.4s
+ => => exporting layers                                                                                            0.4s
+ => => writing image sha256:9806f501eadc6a40b22f03cf5e8e2f4313b625e5b148bc33c022b35da3a68308                       0.0s
+ => => naming to docker.io/library/portfolio-myportfolio                                                           0.0s
+[+] Running 3/3
+ ✔ Network portfolio_default  Created                                                                              0.0s
+ ✔ Container mysql            Started                                                                              0.8s
+ ✔ Container myportfolio      Started                                                                              1.2s
+```
+
+You'll now be able to access the website at `localhost:5000` or `127.0.0.1:5000` in the browser! 
+
+### Running with Docker on your server
+
+***Go to https://duckdns.org/ and add a domain name with the IP of your server and change the server_name in myportfolio.conf to whatever domain name you made***
+
+Run docker-compose for production
+```bash
+❯ docker compose -f docker-compose.prod.yml up -d --build
+```
+
+You should get a response like this in the terminal:
+```
+❯ docker compose -f docker-compose.prod.yml up -d --build
+[+] Building 0.9s (10/10) FINISHED
+ => [myportfolio internal] load build definition from Dockerfile                                                   0.0s
+ => => transferring dockerfile: 276B                                                                               0.0s
+ => [myportfolio internal] load .dockerignore                                                                      0.0s
+ => => transferring context: 2B                                                                                    0.0s
+ => [myportfolio internal] load metadata for docker.io/library/python:3.9-slim-buster                              0.6s
+ => [myportfolio 1/5] FROM docker.io/library/python:3.9-slim-buster@sha256:320a7a4250aba4249f458872adecf92eea88dc  0.0s
+ => [myportfolio internal] load build context                                                                      0.2s
+ => => transferring context: 353.30kB                                                                              0.2s
+ => CACHED [myportfolio 2/5] WORKDIR /myportfolio                                                                  0.0s
+ => CACHED [myportfolio 3/5] COPY requirements.txt .                                                               0.0s
+ => CACHED [myportfolio 4/5] RUN pip3 install -r requirements.txt                                                  0.0s
+ => CACHED [myportfolio 5/5] COPY . .                                                                              0.0s
+ => [myportfolio] exporting to image                                                                               0.0s
+ => => exporting layers                                                                                            0.0s
+ => => writing image sha256:f4967dae53f8001260671392f6f42c70f9ae6db950eb5d76050db1bb776142d9                       0.0s
+ => => naming to docker.io/library/portfolio-myportfolio                                                           0.0s
+[+] Running 3/0
+ ✔ Container mysql        Running                                                                                  0.0s
+ ✔ Container myportfolio  Running                                                                                  0.0s
+ ✔ Container nginx        Running                                                                                  0.0s
+```
+
+You'll now be able to access the website at the domain you made! 
+
+### Flask only
 
 Start flask development server
 ```bash
-$ flask run
+❯ flask run
 ```
 
 You should get a response like this in the terminal:
@@ -85,7 +119,7 @@ You should get a response like this in the terminal:
 
 You'll now be able to access the website at `localhost:5000` or `127.0.0.1:5000` in the browser! 
 
-*Note: The portfolio site will only work on your local machine while you have it running inside of your terminal. We'll go through how to host it in the cloud in the next few weeks!* 
+
 
 ## Contributing
 
