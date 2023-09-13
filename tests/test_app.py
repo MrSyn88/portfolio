@@ -32,15 +32,19 @@ class AppTestCase(unittest.TestCase):
         html = response.get_data(as_text=True)
         assert "<title>NR | About</title>" in html
         assert "About <span>Me</span>" in html
-        assert '''I was born in Plano, TX, and spent most of my childhood in Kansas. It was there that I discovered my passion for coding
-        through a video game design class. When I returned to Texas for my Junior year, I continued exploring this interest in
-        my new high school.
-        
-        This led me to pursue a degree in computer science at The University of Texas at San Antonio. Throughout my studies, I
-        focused on cloud and systems, gaining valuable insights from professors and peers alike.
-        
-        In May 2023, I graduated and began working as an MLH Fellow, eager to gain more hands-on experience. I'm now seeking a
-        role where I can apply my knowledge and continue learning alongside a collaborative team.''' in html
+        assert '''I was born in Plano, TX, and spent most of my childhood in Kansas. It was there that I discovered my passion
+            for coding
+            through a video game design class. When I returned to Texas for my Junior year, I continued exploring this
+            interest in
+            my new high school.
+            <br>
+            This led me to pursue a degree in computer science at The University of Texas at San Antonio. Throughout my
+            studies, I
+            focused on cloud and systems, gaining valuable insights from professors and peers alike.
+            <br>
+            In May 2023, I graduated and began working as an MLH Fellow, eager to gain more hands-on experience. I'm now
+            seeking a
+            role where I can apply my knowledge and continue learning alongside a collaborative team.''' in html
         assert '<img src="https://i.ibb.co/ccT9tVM/bros.jpg" alt="Photo with brothers">' in html
         assert "Where I've <span>Been</span>" in html
         assert "<script src=\"https://cdn.maptiler.com/maplibre-gl-js/v2.4.0/maplibre-gl.js\"></script>" in html
