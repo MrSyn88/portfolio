@@ -36,15 +36,7 @@ class AppTestCase(unittest.TestCase):
             for coding
             through a video game design class. When I returned to Texas for my Junior year, I continued exploring this
             interest in
-            my new high school.
-            <br>
-            This led me to pursue a degree in computer science at The University of Texas at San Antonio. Throughout my
-            studies, I
-            focused on cloud and systems, gaining valuable insights from professors and peers alike.
-            <br>
-            In May 2023, I graduated and began working as an MLH Fellow, eager to gain more hands-on experience. I'm now
-            seeking a
-            role where I can apply my knowledge and continue learning alongside a collaborative team.''' in html
+            my new high school.''' in html
         assert '<img src="https://i.ibb.co/ccT9tVM/bros.jpg" alt="Photo with brothers">' in html
         assert "Where I've <span>Been</span>" in html
         assert "<script src=\"https://cdn.maptiler.com/maplibre-gl-js/v2.4.0/maplibre-gl.js\"></script>" in html
@@ -77,7 +69,7 @@ class AppTestCase(unittest.TestCase):
         assert 'Learning Instruments' in html
         assert 'Attending Hackathons' in html
         assert 'Mechanical Keyboards' in html
-        
+
     def test_contact_me(self):
         "Open contact me and check it's content"
         response = self.client.get("/contact-me")
@@ -252,12 +244,13 @@ class AppTestCase(unittest.TestCase):
 class AppApiTestCase(unittest.TestCase):
     def setUp(self):
         self.client = app.test_client()
-        
+
     def get_basic_auth_headers(self):
         username = "testing"
         password = "testing"
         auth_string = f"{username}:{password}"
-        auth_base64 = base64.b64encode(auth_string.encode('utf-8')).decode('utf-8')
+        auth_base64 = base64.b64encode(
+            auth_string.encode('utf-8')).decode('utf-8')
         return {'Authorization': f'Basic {auth_base64}'}
 
     def test_timeline_api(self):
@@ -309,7 +302,7 @@ class AppApiTestCase(unittest.TestCase):
 
         # test DELETE for both posts and use GET to test the results
         response = self.client.delete(f"/api/timeline_post/2",
-                                    headers=self.get_basic_auth_headers())
+                                      headers=self.get_basic_auth_headers())
         assert response.status_code == 200
         assert response.is_json
         json = response.get_json()
@@ -328,7 +321,7 @@ class AppApiTestCase(unittest.TestCase):
         assert json["timeline_posts"][0]["id"] == 1
 
         response = self.client.delete(f"/api/timeline_post/1",
-                                    headers=self.get_basic_auth_headers())
+                                      headers=self.get_basic_auth_headers())
         assert response.status_code == 200
         assert response.is_json
         json = response.get_json()
@@ -346,7 +339,8 @@ class AppApiTestCase(unittest.TestCase):
         "Test timeline api POST requests with malformed data"
         # POST request missing name
         response = self.client.post("/api/timeline_post",
-                                    data={"email": "john@example.com", "content": "Hello world, I'm John!"},
+                                    data={"email": "john@example.com",
+                                          "content": "Hello world, I'm John!"},
                                     headers=self.get_basic_auth_headers())
         assert response.status_code == 400
         json = response.get_json()
@@ -355,7 +349,8 @@ class AppApiTestCase(unittest.TestCase):
 
         # POST request missing content
         response = self.client.post("/api/timeline_post",
-                                    data={"name": "John Doe", "email": "john@example.com", "content": ""},
+                                    data={
+                                        "name": "John Doe", "email": "john@example.com", "content": ""},
                                     headers=self.get_basic_auth_headers())
         assert response.status_code == 400
         json = response.get_json()
@@ -364,7 +359,8 @@ class AppApiTestCase(unittest.TestCase):
 
         # POST request missing email
         response = self.client.post("/api/timeline_post",
-                                    data={"name": "John Doe", "content": "Hello world, I'm John!"},
+                                    data={"name": "John Doe",
+                                          "content": "Hello world, I'm John!"},
                                     headers=self.get_basic_auth_headers())
         assert response.status_code == 400
         json = response.get_json()
