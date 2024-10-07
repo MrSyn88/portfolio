@@ -33,8 +33,8 @@ else:
                          port=3306
                          )
 
-print(mydb)
-
+if os.getenv("FLASK_ENV") == "development":
+    print(mydb)
 
 class TimelinePost(Model):
     name = CharField()

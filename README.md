@@ -31,7 +31,7 @@ Run docker-compose. If you're using Docker Desktop and WSL2 like me, you might n
 ```
 
 You should get a response like this in the terminal:
-```
+```bash
 ❯ sudo docker compose up -d --build
 [sudo] password for mrsyn:
 [+] Building 2.9s (10/10) FINISHED                                                                       docker:default
@@ -69,7 +69,7 @@ Run docker-compose for production
 ```
 
 You should get a response like this in the terminal:
-```
+```bash
 ❯ docker compose -f docker-compose.prod.yml up -d --build
 [+] Building 0.9s (10/10) FINISHED
  => [myportfolio internal] load build definition from Dockerfile                                                   0.0s
@@ -98,23 +98,24 @@ You'll now be able to access the website at the domain you made!
 
 ### Flask only
 
-Start flask development server
+Start flask server after setting it to development and setting mysql host to localhost
 ```bash
+❯ export FLASK_ENV=development && export MYSQL_HOST=localhost
 ❯ flask run
 ```
 
 You should get a response like this in the terminal:
-```
+```bash
 ❯ flask run
  * Serving Flask app 'app' (lazy loading)
- * Environment: production
-   WARNING: This is a development server. Do not use it in a production deployment.
-   Use a production WSGI server instead.
+ * Environment: development
  * Debug mode: on
+<peewee.MySQLDatabase object at 0x7fbce0d812d0>
  * Running on http://127.0.0.1:5000/ (Press CTRL+C to quit)
  * Restarting with stat
  * Debugger is active!
- * Debugger PIN: 129-890-435
+ * Debugger PIN: 122-060-471
+<peewee.MySQLDatabase object at 0x7fd49ba04220>
 ```
 
 You'll now be able to access the website at `localhost:5000` or `127.0.0.1:5000` in the browser! 
